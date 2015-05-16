@@ -22,7 +22,7 @@ Key-Features
 + Easy to implement
 + Easy Fullscreen
 + Customizable
-+ Crossbrowser (Chrome, Safari, Opera, Firefox & even IE)
++ Crossbrowser (Chrome, Safari, Opera, Firefox & even IE +Mobile)
 + Slide just anything
 + Free for ever & everything
 
