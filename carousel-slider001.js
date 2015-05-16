@@ -39,7 +39,7 @@ $(function(){
 	var clAnimationSpeed = 1000;
 	var clSpeed = 5000;
 	var clAutoPlay = true;
-	var clSlideOverflow = 'scroll'; // Set what happens when there is overflow (basic css)
+	var clSlideOverflow = 'auto'; // Set what happens when there is overflow (basic css)
 
 	// Find your stuff
 	var $cl = $('#carousel');
