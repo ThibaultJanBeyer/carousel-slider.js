@@ -7,13 +7,13 @@
 a simple but awesome carousel slide
 
 -----------------------------------
---- Project Page Info & Updates ---
+Project Page Info & Updates
 -----------------------------------
 
-kit.thibaultjanbeyer.com/tools/carousel-slider/
+http://kit.thibaultjanbeyer.com/tools/carousel-slider/
 
 --------------------
---- Key-Features ---
+Key-Features
 --------------------
 
 + Responsive
@@ -26,29 +26,33 @@ kit.thibaultjanbeyer.com/tools/carousel-slider/
 + Free for ever & everything
 
 ---------------
---- Install ---
+Install
 ---------------
 
 First add jQuery to your header:
+```
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+```
 Just download the clslider.js and link it to your documents after jquery (full control):
+```
 <script src="yourfolder/clslider-001.js"></script>
-
+```
 OR just use this link if you don't want to install anything (easy setup):
+```
 <script src="http://kit.thibaultjanbeyer.com/tools/carousel-slider/carousel-slider001_mini.js"></script>
-
+```
 This is the basic html Markup you'll need:
+```
 <div id="carousel" class="carousel">
 	<div class="inner">
 		<div class="slide" style="background: red">
-			<h3>Page 1</h3>
+			<h3>Slide 1</h3>
 		</div>
 		<div class="slide" style="background: orange">
-			<h3>Page 2</h3>
+			<h3>Slide 2</h3>
 		</div>
 		<div class="slide" style="background: yellow">
-			<h3>Page 3</h3>
+			<h3>Slide 3</h3>
 		</div>
 	</div>
 	<div class="arrow left"></div>
@@ -56,17 +60,17 @@ This is the basic html Markup you'll need:
 	<p class="pause">Pause</p>
 	<p class="play">Play</p>
 </div>
-
-Note: if you do not need pause/play buttons or even pages, just add/remove them in html.
+```
+*Note: if you do not need pause/play buttons or even whole Slides, just add/remove them in html.*
 
 That's it! You're ready to rock!
 
 ---------------------
---- Customisation ---
+Customisation
 ---------------------
 
 Change the whole width and height (keep vw and vh as units for responsive). Aswell as the animation speed and automatic slide speed (you can also set clAutoPlay to "false").
-
+```
 // Options
 var clWidth = 100;
 var clHeight = 100;
@@ -75,9 +79,9 @@ var clHeightUnit = 'vh' // vh = % of Viewport Height
 var clAnimationSpeed = 1000;
 var clSpeed = 15000;
 var clAutoPlay = true;
-
+```
 In some cases you might use your own Markup:
-
+```
 // Find your stuff
 var $cl = $('#carousel');
 var $clInner = $cl.find('.inner');
@@ -87,9 +91,9 @@ var $clArrowLeft = $cl.find('.arrow.left');
 var $clArrowRight = $cl.find('.arrow.right');
 var $clPauseAutoPlay = $cl.find('.pause');
 var $clPlayAutoPlay = $cl.find('.play');
-
+```
 Styling is no problem, just use regular CSS. But in some case you might want to change the preset styles. If you know basics in Jquery it is also supereasy.
 
 ------------------
---- Have Fun ! ---
+Have Fun !
 ------------------
