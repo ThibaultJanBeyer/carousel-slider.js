@@ -80,6 +80,7 @@ var clHeightUnit = 'vh' // vh = % of Viewport Height
 var clAnimationSpeed = 1000;
 var clSpeed = 15000;
 var clAutoPlay = true;
+var clSlideOverflow = 'scroll'; // Set what happens when there is overflow (basic css)
 ```
 In some cases you might use your own Markup:
 ```
