@@ -8,7 +8,7 @@
 a simple but awesome carousel slide
 
 
-Project Page Info & Updates
+Project Page: Demo, Info & Updates
 -----------------------------------
 
 http://kit.thibaultjanbeyer.com/tools/carousel-slider/
