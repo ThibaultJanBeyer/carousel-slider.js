@@ -5,7 +5,7 @@ $(function(){
 
 	* VERSION: 0.0.1
 		* DATE: 2015-05-16
-
+	
 	* Copyright (c) 2015, Thibault Jan Beyer
 	* Website: http://www.thibaultjanbeyer.com/
 	* Example: http://kit.thibaultjanbeyer.com/tools/carousel-slider/
@@ -39,6 +39,7 @@ $(function(){
 	var clAnimationSpeed = 1000;
 	var clSpeed = 5000;
 	var clAutoPlay = true;
+	var clSlideOverflow = 'scroll'; // Set what happens when there is overflow (basic css)
 
 	// Find your stuff
 	var $cl = $('#carousel');
@@ -79,7 +80,8 @@ $(function(){
 		width: clWidth+clUnit,
 		height: clHeight+clHeightUnit,
 		position: 'relative',
-		overflow: 'hidden'
+		overflow: 'hidden',
+		background: 'black'
 	});
 	$clInner.css({
 		margin: '0',
@@ -92,11 +94,12 @@ $(function(){
 	$clSlides.css({
 		width: clWidth+clUnit,
 		height: clHeight+clHeightUnit,
+		overflowY: clSlideOverflow,
 		float: 'left'
 	});
 	$clArrows.css({
 		width: clMove+clUnit,
-		height: clHeight+clHeightUnit,
+		height: '100%',
 		position: 'absolute',
 		top: '0',
 		zIndex: '5',
@@ -108,7 +111,7 @@ $(function(){
 	$clArrowRight.css({
 		right: '0'
 	});
-
+	
 	// Since everything is set up, we can start creating 4 copies of the lides and append/prepend them respectively:
 	var i = 0;
 	var $temp;
@@ -130,7 +133,7 @@ $(function(){
 
 	// Interval
 	var interval;
-
+	
 	// Start
 	function clPlay(){
 		if (clAutoPlay === true){
@@ -192,7 +195,7 @@ $(function(){
 							};
 						})
 		});
-
+	
 	// righthover
 	$clArrowRight.hover(
 		function() {
