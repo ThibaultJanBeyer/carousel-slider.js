@@ -1,6 +1,7 @@
 # carousel-slider.js
 			* VERSION: 0.0.1
  			* DATE: 2015-05-16
+ 			* under The MIT License (MIT)
  			* Copyright (c) 2015, Thibault Jan Beyer
 			* Website: http://www.thibaultjanbeyer.com/
 
