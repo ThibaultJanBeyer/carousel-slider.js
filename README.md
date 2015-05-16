@@ -7,13 +7,13 @@
 
 a simple but awesome carousel slide
 
------------------------------------
+
 Project Page Info & Updates
 -----------------------------------
 
 http://kit.thibaultjanbeyer.com/tools/carousel-slider/
 
---------------------
+
 Key-Features
 --------------------
 
@@ -26,7 +26,7 @@ Key-Features
 + Slide just anything
 + Free for ever & everything
 
----------------
+
 Install
 ---------------
 
@@ -66,7 +66,7 @@ This is the basic html Markup you'll need:
 
 That's it! You're ready to rock!
 
----------------------
+
 Customisation
 ---------------------
 
@@ -97,4 +97,4 @@ Styling is no problem, just use regular CSS. But in some case you might want to 
 
 ------------------
 Have Fun !
-------------------
+
