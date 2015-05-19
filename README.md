@@ -1,7 +1,7 @@
 # carousel-slider.js
 
-	* VERSION: 0.0.1
- 	* DATE: 2015-05-16
+	* VERSION: 0.0.2
+ 	* DATE: 2015-05-19
  	* under The MIT License (MIT)
  	* Copyright (c) 2015, Thibault Jan Beyer
 	* Website: http://www.thibaultjanbeyer.com/
@@ -18,8 +18,9 @@ http://kit.thibaultjanbeyer.com/tools/carousel-slider/
 Key-Features
 --------------------
 
-+ Responsive
-+ Super Light (Only ~2.776 bytes)
++ Responsive & Mobile Friendly
++ Built in Swipe gestures
++ Super Light (Only ~5KB)
 + Easy to implement
 + Easy Fullscreen
 + Customizable
@@ -40,13 +41,13 @@ First add jQuery to your header:
 Just download the clslider.js and link it to your documents after jquery (full control):
 
 ```html
-<script src="yourfolder/clslider-001.js"></script>
+<script src="yourfolder/carousel-slider002.js"></script>
 ```
 
 OR just use this link if you don't want to install anything (easy setup):
 
 ```html
-<script src="http://kit.thibaultjanbeyer.com/tools/carousel-slider/carousel-slider001_mini.js"></script>
+<script src="http://kit.thibaultjanbeyer.com/tools/carousel-slider/cls.min.js"></script>
 ```
 
 This is the basic html Markup you'll need:
@@ -91,6 +92,7 @@ var clAnimationSpeed = 1000;
 var clSpeed = 15000;
 var clAutoPlay = true;
 var clSlideOverflow = 'scroll'; // Set what happens when there is overflow (basic css)
+var clSwiping = true; // Choose if swipe gestures for mobile shall be enables
 ```
 
 In some cases you might use your own Markup:
