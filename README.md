@@ -1,7 +1,7 @@
 # carousel-slider.js
 
-	* VERSION: 0.0.2
- 	* DATE: 2015-05-19
+	* VERSION: 0.0.3
+ 	* DATE: 2015-05-20
  	* under The MIT License (MIT)
  	* Copyright (c) 2015, Thibault Jan Beyer
 	* Website: http://www.thibaultjanbeyer.com/
@@ -20,7 +20,8 @@ Key-Features
 
 + Responsive & Mobile Friendly
 + Built in Swipe gestures
-+ Super Light (Only ~5KB)
++ Support multiple Sliders on one Page (todo: slider in slider)
++ Light (Only ~6KB)
 + Easy to implement
 + Easy Fullscreen
 + Customizable
@@ -41,7 +42,7 @@ First add jQuery to your header:
 Just download the clslider.js and link it to your documents after jquery (full control):
 
 ```html
-<script src="yourfolder/carousel-slider002.js"></script>
+<script src="yourfolder/carousel-slider003.js"></script>
 ```
 
 OR just use this link if you don't want to install anything (easy setup):
@@ -53,7 +54,7 @@ OR just use this link if you don't want to install anything (easy setup):
 This is the basic html Markup you'll need:
 
 ```html
-<div id="carousel" class="carousel">
+<div class="carousel" clWidth="100" clHeight="100">
 	<div class="inner">
 		<div class="slide" style="background: red">
 			<h3>Slide 1</h3>
@@ -72,7 +73,8 @@ This is the basic html Markup you'll need:
 </div>
 ```
 
-*Note: if you do not need pause/play buttons or even whole Slides, just add/remove them in html.*
+*1.Note: To change the width and/or the height, just change the values of clWidth="100" clHeight="100" to what ever you want.*
+*2.Note: if you do not need pause/play buttons or even whole Slides, just add/remove them in html.*
 
 That's it! You're ready to rock!
 
@@ -84,29 +86,27 @@ Change the whole width and height (keep vw and vh as units for responsive). Aswe
 
 ```js
 // Options
-var clWidth = 100;
-var clHeight = 100;
-var clUnit = 'vw'; // vw = % of Viewport Width
-var clHeightUnit = 'vh' // vh = % of Viewport Height
-var clAnimationSpeed = 1000;
-var clSpeed = 15000;
-var clAutoPlay = true;
-var clSlideOverflow = 'scroll'; // Set what happens when there is overflow (basic css)
-var clSwiping = true; // Choose if swipe gestures for mobile shall be enables
+var clAnimationSpeed = 800; // Speed of animations in ms
+var clAutoPlay = true; // Choose if the slider automatically slides
+var clSpeed = 5000; // Time between automatic sliding in ms
+var clSlideOverflow = 'auto'; // Set what happens when there is overflow (basic css)
+var clSwiping = true; // Choose if swipe gestures for mobile shall be enabled
+var clUnit = 'vw'; // choose a measuring unit vw = % of Viewport Width (vw = best)
+var clHeightUnit = 'vh' // choose a measuring unit vh = % of Viewport Height (vh = best)
 ```
 
-In some cases you might use your own Markup:
+In some cases you might use your own Markup (advanced users):
 
 ```js
 // Find your stuff
-var $cl = $('#carousel');
-var $clInner = $cl.find('.inner');
-var $clSlides = $clInner.find('.slide');
-var $clArrows = $cl.find('.arrow');
-var $clArrowLeft = $cl.find('.arrow.left');
-var $clArrowRight = $cl.find('.arrow.right');
-var $clPauseAutoPlay = $cl.find('.pause');
-var $clPlayAutoPlay = $cl.find('.play');
+$cl[i] = $(this);
+$clInner[i] = $(this).find('.inner');
+$clSlides[i] = $(this).find('.slide');
+$clArrows[i] = $(this).find('.arrow');
+$clArrowLeft[i] = $(this).find('.arrow.left');
+$clArrowRight[i] = $(this).find('.arrow.right');
+$clPauseAutoPlay[i] = $(this).find('.pause');
+$clPlayAutoPlay[i] = $(this).find('.play');
 ```
 
 Styling is no problem, just use regular CSS. But in some case you might want to change the preset styles. If you know basics in Jquery it is also supereasy.
