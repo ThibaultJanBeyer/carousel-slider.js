@@ -1,7 +1,7 @@
 # carousel-slider.js
 
-	* VERSION: 0.0.3
- 	* DATE: 2015-05-20
+	* VERSION: 0.0.4
+ 	* DATE: 2015-05-27
  	* under The MIT License (MIT)
  	* Copyright (c) 2015, Thibault Jan Beyer
 	* Website: http://www.thibaultjanbeyer.com/
@@ -20,7 +20,8 @@ Key-Features
 
 + Responsive & Mobile Friendly
 + Built in Swipe gestures
-+ Support multiple Sliders on one Page (todo: slider in slider)
++ Support multiple Sliders on one Page
++ W3C Friendly
 + Light (Only ~6KB)
 + Easy to implement
 + Easy Fullscreen
@@ -54,7 +55,7 @@ OR just use this link if you don't want to install anything (easy setup):
 This is the basic html Markup you'll need:
 
 ```html
-<div class="carousel" clWidth="100" clHeight="100">
+<div class="carousel" data-clWidth="100" data-clHeight="100">
 	<div class="inner">
 		<div class="slide" style="background: red">
 			<h3>Slide 1</h3>
@@ -73,7 +74,7 @@ This is the basic html Markup you'll need:
 </div>
 ```
 
-*1.Note: To change the width and/or the height, just change the values of clWidth="100" clHeight="100" to what ever you want.*
+*1.Note: To change the width and/or the height, just change the values of data-clWidth="100" data-clHeight="100" to what ever you want.*
 *2.Note: if you do not need pause/play buttons or even whole Slides, just add/remove them in html.*
 
 That's it! You're ready to rock!
