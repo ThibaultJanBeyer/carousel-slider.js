@@ -6,8 +6,12 @@ $(function(){
 	/* -------------------------------------------------------------
 	The MIT License (MIT)
 
-		* VERSION: 0.0.3
-		* DATE: 2015-05-20
+		* VERSION: 0.0.4
+		* DATE: 2015-05-27
+
+	Added v004 2015-05-27:
+	+ Slider within Slider
+	+ w3c friendly
 
 	Added v003 2015-05-20:
 	+ You can now have multiple totally different sliders on one page (todo: slider inside of slider)
@@ -45,7 +49,7 @@ $(function(){
 	
 	var clAnimationSpeed = 800; // Speed of animations in ms
 	var clAutoPlay = true; // Choose if the slider automatically slides
-	var clSpeed = 5000; // Time between automatic sliding in ms
+	var clSpeed = 7000; // Time between automatic sliding in ms
 	var clSlideOverflow = 'auto'; // Set what happens when there is overflow (basic css)
 	var clSwiping = true; // Choose if swipe gestures for mobile shall be enabled
 	var clUnit = 'vw'; // choose a measuring unit vw = % of Viewport Width (vw = best)
@@ -86,16 +90,16 @@ $(function(){
 	$('.carousel').each(function(i, el) {
 		// Find your stuff
 		$cl[i] = $(this);
-		$clInner[i] = $(this).find('.inner');
-		$clSlides[i] = $(this).find('.slide');
-		$clArrows[i] = $(this).find('.arrow');
-		$clArrowLeft[i] = $(this).find('.arrow.left');
-		$clArrowRight[i] = $(this).find('.arrow.right');
-		$clPauseAutoPlay[i] = $(this).find('.pause');
-		$clPlayAutoPlay[i] = $(this).find('.play');
+		$clInner[i] = $cl[i].children('.inner');
+		$clSlides[i] = $clInner[i].children('.slide');
+		$clArrows[i] = $cl[i].children('.arrow');
+		$clArrowLeft[i] = $cl[i].children('.arrow.left');
+		$clArrowRight[i] = $cl[i].children('.arrow.right');
+		$clPlayAutoPlay[i] = $cl[i].children('.play');
+		$clPauseAutoPlay[i] = $cl[i].children('.pause');
 		// Get Width and Height
-		clWidth[i] = $cl[i].attr('clWidth');
-		clHeight[i] = $cl[i].attr('clHeight');
+		clWidth[i] = $cl[i].attr('data-clWidth');
+		clHeight[i] = $cl[i].attr('data-clHeight');
 		// Move Options
 		clMove[i] = clWidth[i]/10;
 		clMoveFull[i] = clWidth[i] - clMove[i];
@@ -343,11 +347,20 @@ $(function(){
 		       });
 			
 			// At the end -> Stop Autoplay:
+			if (clAutoPlay) {
+				$clPlayAutoPlay[i].hide();
+			} else {
+				$clPauseAutoPlay[i].hide();
+			}
 			$clPauseAutoPlay[i].click(function(event) {
+				$clPauseAutoPlay[i].hide();
+				$clPlayAutoPlay[i].show();
 				clAutoPlay = false;
 				clPause();
 			});
 			$clPlayAutoPlay[i].click(function(event) {
+				$clPauseAutoPlay[i].show();
+				$clPlayAutoPlay[i].hide();
 				clAutoPlay = true;
 				clPlay();
 			});
