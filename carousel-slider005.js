@@ -6,8 +6,11 @@ $(function(){
 	/* -------------------------------------------------------------
 	The MIT License (MIT)
 
-		* VERSION: 0.0.4
-		* DATE: 2015-05-27
+		* VERSION: 0.0.5
+		* DATE: 2015-06-20
+	
+	Added v005 2015-06-20:
+	+ Key Funktions within slider
 
 	Added v004 2015-05-27:
 	+ Slider within Slider
@@ -47,7 +50,7 @@ $(function(){
 
 	// Options (change as you like)
 	
-	var clAnimationSpeed = 800; // Speed of animations in ms
+	var clAnimationSpeed = 900; // Speed of animations in ms
 	var clAutoPlay = true; // Choose if the slider automatically slides
 	var clSpeed = 7000; // Time between automatic sliding in ms
 	var clSlideOverflow = 'auto'; // Set what happens when there is overflow (basic css)
@@ -140,6 +143,7 @@ $(function(){
 		});
 		$clArrows[i].css({
 			width: clMove[i]+clUnit,
+			maxWidth: '100px',
 			height: '100%',
 			position: 'absolute',
 			top: '0',
@@ -183,7 +187,7 @@ $(function(){
 						$clInner[i]
 							.animate({marginLeft: '-='+clMove[i]+clUnit},
 									clAnimationSpeed/2)
-							.delay(clAnimationSpeed/6)
+							.delay(clAnimationSpeed/5)
 							.animate({marginLeft: '-='+clMoveFull[i]+clUnit},
 									clAnimationSpeed,
 									function(){
@@ -199,7 +203,7 @@ $(function(){
 								})
 					},clSpeed);
 					
-				}
+				};
 			};
 
 			function clPause(){
@@ -271,7 +275,7 @@ $(function(){
 							.stop(true, true)
 							.animate({marginLeft: '-='+clMove[i]+clUnit},
 							clAnimationSpeed/4);
-					}
+					};
 			})
 				.on('mouseleave', function() {
 					clRightHoverLeave[i] = true;
@@ -283,7 +287,7 @@ $(function(){
 							clAnimationSpeed/4);
 						clRightHover[i] = false;
 						clRightHoverLeave[i] = false;
-					}
+					};
 			})
 				.on('click', function() {
 				if (clSliding[i] === false && clRightHover[i] === true) {
@@ -316,6 +320,7 @@ $(function(){
 				.on('swiperight',  function(e){ 
 					if (clSliding[i] === false && clSwiping === true) {
 						clPause();
+						clSliding[i] = true;
 						$clInner[i]
 							.animate({marginLeft: '+='+clWidth[i]+clUnit},
 								clAnimationSpeed,
@@ -325,12 +330,35 @@ $(function(){
 										clSlidePos[i] = clSlidesNum[i];
 										$clInner[i].css({marginLeft: "-"+clLastPos[i]+clUnit});
 									};
+									clSliding[i] = false;
 								});
 						clPlay();
 					};
 			 	})
 				.on('swipeleft', function(){
 					if (clSliding[i] === false && clSwiping === true) {
+						clPause();
+						clSliding[i] = true;
+						$clInner[i]
+							.animate({marginLeft: '-='+clWidth[i]+clUnit},
+								clAnimationSpeed,
+								function(){
+									clSlidePos[i]++;
+									if (clSlidePos[i] > clSlidesNum[i]) {
+										clSlidePos[i] = 1;
+										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+clUnit});
+									};
+									clSliding[i] = false;
+								});
+						clPlay();
+					};
+		       });
+
+			// Keypress within slider
+			document.addEventListener("keydown", function(ev) { 
+  				if ( ev.keyCode == 39 ) { /*right*/
+  					if (clSliding[i] === false && clSwiping === true) {
+  						clSliding[i] = true;
 						clPause();
 						$clInner[i]
 							.animate({marginLeft: '-='+clWidth[i]+clUnit},
@@ -341,10 +369,41 @@ $(function(){
 										clSlidePos[i] = 1;
 										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+clUnit});
 									};
+									clSliding[i] = false;
 								});
 						clPlay();
 					};
-		       });
+     			} else if ( ev.keyCode == 37 ) { /*left*/
+					if (clSliding[i] === false && clSwiping === true) {
+						clSliding[i] = true;
+						clPause();
+						$clInner[i]
+							.animate({marginLeft: '+='+clWidth[i]+clUnit},
+								clAnimationSpeed,
+								function(){
+									clSlidePos[i]--;
+									if (clSlidePos[i] < 1) {
+										clSlidePos[i] = clSlidesNum[i];
+										$clInner[i].css({marginLeft: "-"+clLastPos[i]+clUnit});
+									};
+									clSliding[i] = false;
+								});
+						clPlay();
+					};
+     			} else if ( ev.keyCode == 32 ) { /*space*/
+					if (clAutoPlay == true) {
+						$clPauseAutoPlay[i].hide();
+						$clPlayAutoPlay[i].show();
+						clAutoPlay = false;
+						clPause();
+					} else if (clAutoPlay == false) {
+						$clPauseAutoPlay[i].show();
+						$clPlayAutoPlay[i].hide();
+						clAutoPlay = true;
+						clPlay();
+					};
+				};
+  			});
 			
 			// At the end -> Stop Autoplay:
 			if (clAutoPlay) {
