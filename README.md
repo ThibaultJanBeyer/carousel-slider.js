@@ -1,7 +1,7 @@
 # carousel-slider.js
 
-	* VERSION: 0.0.4
- 	* DATE: 2015-05-27
+	* VERSION: 0.0.5
+ 	* DATE: 2015-06-20
  	* under The MIT License (MIT)
  	* Copyright (c) 2015, Thibault Jan Beyer
 	* Website: http://www.thibaultjanbeyer.com/
@@ -19,6 +19,7 @@ Key-Features
 --------------------
 
 + Responsive & Mobile Friendly
++ Keyboard supported (arrows & space)
 + Built in Swipe gestures
 + Support multiple Sliders on one Page
 + W3C Friendly
