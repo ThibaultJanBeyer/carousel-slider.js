@@ -44,7 +44,7 @@ First add jQuery to your header:
 Just download the clslider.js and link it to your documents after jquery (full control):
 
 ```html
-<script src="yourfolder/carousel-slider005.js"></script>
+<script src="yourfolder/cls.min.js"></script>
 ```
 
 OR just use this link if you don't want to install anything (easy setup):
