@@ -12,7 +12,7 @@ a simple but awesome carousel slide
 Project Page: Demo, Info & Updates
 -----------------------------------
 
-http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/
+http://kit.thibaultjanbeyer.com/tools/carousel-slider/
 
 
 Key-Features
