@@ -55,40 +55,80 @@ $(function(){
 	var clSpeed = 7000; // Time between automatic sliding in ms
 	var clSlideOverflow = 'auto'; // Set what happens when there is overflow (basic css)
 	var clSwiping = true; // Choose if swipe gestures for mobile shall be enabled
-	var clUnit = 'vw'; // choose a measuring unit vw = % of Viewport Width (vw = best)
-	var clHeightUnit = 'vh' // choose a measuring unit vh = % of Viewport Height (vh = best)
 
 	/*
 	-------------------------------------------------------------
 	Only change the following code if you know what you're doing.
 	-------------------------------------------------------------
 	*/
-	
+
+	//this is a very dirty trick for responsiveness untill I find out a better way :(
+	$( window ).resize(function() {
+		window.location.href=window.location.href;
+	});
+	//tests
+	/*$( window ).resize(function() {
+					//getting the new actual width and height in px
+					clWidth[i] = $cl[i].width();
+					clHeight[i] = $cl[i].height();
+					// And defining the width of all slides together:
+					clInnerWidth[i] = clWidth[i]*(clSlidesNum[i]+4);
+					// Now we set up the starting Positions of the first and the last slide.
+					// Since we will add 2 Before first and 2 after last there is some calculation to be done.
+					clFirstPos[i] = 2*clWidth[i];
+					clLastPos[i] = (clSlidesNum[i]+1)*clWidth[i];
+					// Lastly we set the slide where to start (we want to start at slide 1)
+					clSlidePos[i] = 1;
+					// we continue setting the css
+					$clInner[i].css({
+						marginLeft: "-"+clFirstPos[i]+'px',
+						width:clInnerWidth[i]+'px'
+					});
+					$clSlides[i].css({
+						width: clWidth[i]+'px',
+						height: clHeight[i]+'px'
+					});
+					// Move Options
+					clMove[i] = clWidth[i]/10;
+					if (clMove[i] > 80) {	//max-width of the arrows will be 80px
+						clMove[i] = 80;
+					};
+					clMoveFull[i] = clWidth[i] - clMove[i]; // sets the full movement based on actual rate
+					// Set movement arrows
+					$clArrows[i].css({
+						width: clMove[i]+'px'
+					});
+	});
+	//end tests*/
+
 	// Setup
-	var $cl = [];
-	var $clInner = [];
-	var $clSlides = [];
-	var $clArrows = [];
-	var $clArrowLeft = [];
-	var $clArrowRight = [];
-	var $clPauseAutoPlay = [];
-	var $clPlayAutoPlay = [];
-	var clWidth = [];
-	var clHeight = [];
-	var clMove = [];
-	var clMoveFull = [];
-	var clSlidesNum = [];
-	var clSlidesNumBefore = [];
-	var clInnerWidth = [];
-	var clFirstPos = [];
-	var clLastPos = [];
-	var clSlidePos = [];
-	var interval = [];
-	var clSliding = [];
-	var clLeftHover = [];
-	var clLeftHoverLeave = [];
-	var clRightHover = [];
-	var clRightHoverLeave = [];
+	var $cl = [],
+		$clInner = [],
+		$clSlides = [],
+		$clArrows = [],
+		$clArrowLeft = [],
+		$clArrowRight = [],
+		$clPauseAutoPlay = [],
+		$clPlayAutoPlay = [],
+		$clAttrWidth = [],
+		$clAttrHeight = [],
+		clWidth = [],
+		clHeight = [],
+		clMoveSetup = [],
+		clMove = [],
+		clMoveFull = [],
+		clSlidesNum = [],
+		clSlidesNumBefore = [],
+		clInnerWidth = [],
+		clFirstPos = [],
+		clLastPos = [],
+		clSlidePos = [],
+		interval = [],
+		clSliding = [],
+		clLeftHover = [],
+		clLeftHoverLeave = [],
+		clRightHover = [],
+		clRightHoverLeave = [];
 
 	$('.carousel').each(function(i, el) {
 		// Find your stuff
@@ -100,12 +140,19 @@ $(function(){
 		$clArrowRight[i] = $cl[i].children('.arrow.right');
 		$clPlayAutoPlay[i] = $cl[i].children('.play');
 		$clPauseAutoPlay[i] = $cl[i].children('.pause');
-		// Get Width and Height
-		clWidth[i] = $cl[i].attr('data-clWidth');
-		clHeight[i] = $cl[i].attr('data-clHeight');
-		// Move Options
-		clMove[i] = clWidth[i]/10;
-		clMoveFull[i] = clWidth[i] - clMove[i];
+		// Now we set up the starting CSS relative to the chosen Options
+		$clAttrWidth[i] = $cl[i].attr('data-width');
+		$clAttrHeight[i] = $cl[i].attr('data-height');
+		$cl[i].css({
+			width: $clAttrWidth[i],
+			height: $clAttrHeight[i],
+			position: 'relative',
+			overflow: 'hidden',
+			background: 'black'
+		});
+		//getting the new actual width and height in px
+		clWidth[i] = $cl[i].width();
+		clHeight[i] = $cl[i].height();
 		// We begin by checking how many slides there are
 		clSlidesNum[i] = $clSlides[i].length;//3
 		// Note that the slider will only work if there are more than one slides inside.
@@ -119,31 +166,30 @@ $(function(){
 		clLastPos[i] = (clSlidesNum[i]+1)*clWidth[i];
 		// Lastly we set the slide where to start (we want to start at slide 1)
 		clSlidePos[i] = 1;
-		// Now we set up the starting CSS relative to the chosen Options
-		$cl[i].css({
-			width: clWidth[i]+clUnit,
-			height: clHeight[i]+clHeightUnit,
-			position: 'relative',
-			overflow: 'hidden',
-			background: 'black'
-		});
+		// we continue setting the css
 		$clInner[i].css({
 			margin: '0',
-			marginLeft: "-"+clFirstPos[i]+clUnit,
+			marginLeft: "-"+clFirstPos[i]+'px',
 			display: 'block',
 			height: '100%',	
 			padding: '0',
-			width:clInnerWidth[i]+clUnit
+			width:clInnerWidth[i]+'px'
 		});
 		$clSlides[i].css({
-			width: clWidth[i]+clUnit,
-			height: clHeight[i]+clHeightUnit,
+			width: clWidth[i]+'px',
+			height: clHeight[i]+'px',
 			overflowY: clSlideOverflow,
 			float: 'left'
 		});
+		// Move Options
+		clMove[i] = clWidth[i]/10;
+		if (clMove[i] > 80) {	//max-width of the arrows will be 80px
+			clMove[i] = 80;
+		};
+		clMoveFull[i] = clWidth[i] - clMove[i]; // sets the full movement based on actual rate
+		// Set movement arrows
 		$clArrows[i].css({
-			width: clMove[i]+clUnit,
-			maxWidth: '100px',
+			width: clMove[i]+'px',
 			height: '100%',
 			position: 'absolute',
 			top: '0',
@@ -185,19 +231,19 @@ $(function(){
 					// animate margin-left. If it's last go to second
 						clSliding[i] = true;
 						$clInner[i]
-							.animate({marginLeft: '-='+clMove[i]+clUnit},
+							.animate({marginLeft: '-='+clMove[i]+'px'},
 									clAnimationSpeed/2)
 							.delay(clAnimationSpeed/5)
-							.animate({marginLeft: '-='+clMoveFull[i]+clUnit},
+							.animate({marginLeft: '-='+clMoveFull[i]+'px'},
 									clAnimationSpeed,
 									function(){
 										clSlidePos[i]++;
 										if (clSlidePos[i] < 1) {
 											clSlidePos[i] = clSlidesNum[i];
-											$clInner[i].css({marginLeft: "-"+clLastPos[i]+clUnit});
+											$clInner[i].css({marginLeft: "-"+clLastPos[i]+'px'});
 										} else if (clSlidePos[i] > clSlidesNum[i]) {
 											clSlidePos[i] = 1;
-											$clInner[i].css({marginLeft: "-"+clFirstPos[i]+clUnit});
+											$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'px'});
 										};
 										clSliding[i] = false;
 								})
@@ -221,7 +267,7 @@ $(function(){
 						clPause();
 						$clInner[i]
 							.stop(true, true)
-							.animate({marginLeft: '+='+clMove[i]+clUnit},
+							.animate({marginLeft: '+='+clMove[i]+'px'},
 							clAnimationSpeed/4);
 					}
 			})
@@ -231,7 +277,7 @@ $(function(){
 						clPlay();
 						$clInner[i]
 							.stop(true, true)
-							.animate({marginLeft: '-='+clMove[i]+clUnit},
+							.animate({marginLeft: '-='+clMove[i]+'px'},
 							clAnimationSpeed/4);
 						clLeftHover[i] = false;
 						clLeftHoverLeave[i] = false;
@@ -241,18 +287,18 @@ $(function(){
 					if (clSliding[i] === false && clLeftHover[i] === true) {
 					clSliding[i] = true;
 					$clInner[i]
-						.animate({marginLeft: '+='+clWidth[i]+clUnit},
+						.animate({marginLeft: '+='+clWidth[i]+'px'},
 							clAnimationSpeed,
 							function(){
 								clSlidePos[i]--;
 								if (clSlidePos[i] < 1) {
 									clSlidePos[i] = clSlidesNum[i];
-									$clInner[i].css({marginLeft: "-"+(clLastPos[i]-clMove[i])+clUnit});
+									$clInner[i].css({marginLeft: "-"+(clLastPos[i]-clMove[i])+'px'});
 								};
 								if (clLeftHoverLeave[i]) {
 									clPlay();
 									$clInner[i]
-										.animate({marginLeft: '-='+clMove[i]+clUnit},
+										.animate({marginLeft: '-='+clMove[i]+'px'},
 										clAnimationSpeed/4);
 									clLeftHoverLeave[i] = false;
 									clLeftHover[i] = false;
@@ -273,7 +319,7 @@ $(function(){
 						clPause();
 						$clInner[i]
 							.stop(true, true)
-							.animate({marginLeft: '-='+clMove[i]+clUnit},
+							.animate({marginLeft: '-='+clMove[i]+'px'},
 							clAnimationSpeed/4);
 					};
 			})
@@ -283,7 +329,7 @@ $(function(){
 						clPlay();
 						$clInner[i]
 							.stop(true, true)
-							.animate({marginLeft: '+='+clMove[i]+clUnit},
+							.animate({marginLeft: '+='+clMove[i]+'px'},
 							clAnimationSpeed/4);
 						clRightHover[i] = false;
 						clRightHoverLeave[i] = false;
@@ -293,18 +339,18 @@ $(function(){
 				if (clSliding[i] === false && clRightHover[i] === true) {
 					clSliding[i] = true;
 					$clInner[i]
-						.animate({marginLeft: '-='+clWidth[i]+clUnit},
+						.animate({marginLeft: '-='+clWidth[i]+'px'},
 							clAnimationSpeed,
 							function(){
 								clSlidePos[i]++;
 								if (clSlidePos[i] > clSlidesNum[i]) {
 									clSlidePos[i] = 1;
-									$clInner[i].css({marginLeft: "-"+(clFirstPos[i]+clMove[i])+clUnit});
+									$clInner[i].css({marginLeft: "-"+(clFirstPos[i]+clMove[i])+'px'});
 								};
 								if (clRightHoverLeave[i]) {
 									clPlay();
 									$clInner[i]
-										.animate({marginLeft: '+='+clMove[i]+clUnit},
+										.animate({marginLeft: '+='+clMove[i]+'px'},
 										clAnimationSpeed/4);
 									clRightHoverLeave[i] = false;
 									clRightHover[i] = false;
@@ -322,13 +368,13 @@ $(function(){
 						clPause();
 						clSliding[i] = true;
 						$clInner[i]
-							.animate({marginLeft: '+='+clWidth[i]+clUnit},
+							.animate({marginLeft: '+='+clWidth[i]+'px'},
 								clAnimationSpeed,
 								function(){
 									clSlidePos[i]--;
 									if (clSlidePos[i] < 1) {
 										clSlidePos[i] = clSlidesNum[i];
-										$clInner[i].css({marginLeft: "-"+clLastPos[i]+clUnit});
+										$clInner[i].css({marginLeft: "-"+clLastPos[i]+'px'});
 									};
 									clSliding[i] = false;
 								});
@@ -340,13 +386,13 @@ $(function(){
 						clPause();
 						clSliding[i] = true;
 						$clInner[i]
-							.animate({marginLeft: '-='+clWidth[i]+clUnit},
+							.animate({marginLeft: '-='+clWidth[i]+'px'},
 								clAnimationSpeed,
 								function(){
 									clSlidePos[i]++;
 									if (clSlidePos[i] > clSlidesNum[i]) {
 										clSlidePos[i] = 1;
-										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+clUnit});
+										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'px'});
 									};
 									clSliding[i] = false;
 								});
@@ -361,13 +407,13 @@ $(function(){
   						clSliding[i] = true;
 						clPause();
 						$clInner[i]
-							.animate({marginLeft: '-='+clWidth[i]+clUnit},
+							.animate({marginLeft: '-='+clWidth[i]+'px'},
 								clAnimationSpeed,
 								function(){
 									clSlidePos[i]++;
 									if (clSlidePos[i] > clSlidesNum[i]) {
 										clSlidePos[i] = 1;
-										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+clUnit});
+										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'px'});
 									};
 									clSliding[i] = false;
 								});
@@ -378,13 +424,13 @@ $(function(){
 						clSliding[i] = true;
 						clPause();
 						$clInner[i]
-							.animate({marginLeft: '+='+clWidth[i]+clUnit},
+							.animate({marginLeft: '+='+clWidth[i]+'px'},
 								clAnimationSpeed,
 								function(){
 									clSlidePos[i]--;
 									if (clSlidePos[i] < 1) {
 										clSlidePos[i] = clSlidesNum[i];
-										$clInner[i].css({marginLeft: "-"+clLastPos[i]+clUnit});
+										$clInner[i].css({marginLeft: "-"+clLastPos[i]+'px'});
 									};
 									clSliding[i] = false;
 								});
@@ -425,5 +471,5 @@ $(function(){
 			});
 			// Start the interval
 			clPlay();
+		});
 	});
-});
