@@ -1,0 +1,23 @@
+{
+  "name": "carousel-slider",
+  "main": "cls.min.js",
+  "homepage": "https://github.com/ThibaultJanBeyer/carousel-slider.js",
+  "authors": [
+    "ThibaultJanBeyer <hi@ThibaultJanBeyer.com>"
+  ],
+  "description": "a simple but awesome carousel slider",
+  "moduleType": [],
+  "keywords": [
+    "slider",
+    "carousel",
+    "modern"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
