@@ -76,34 +76,34 @@ In a nutshell:
 + "arrow left" and "arrow right" is the space left and right where, when you hover it, you see a part of the other slide. If you don't want to have them, you can just omit those two div's.
 + "pause" and "play" are buttons for pause and play, style them how ever you want them to have in css or replace the html text. If you don't want to have play/pause buttons just omit those two div's.
 
-
+![tipewriter icon animation](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/typewriter.gif)
 
 Customisation
 ---------------------
 
 Each carousel slider has some options you can tweak with the help of attributes directly within html. Which makes every carousel slider on your page flexible. For example you could stop the autoplay function of one slider while maintaining it on the other. Here are all attributes you can use:
 
-*data-​width="…"* – 
+*data-​width="…"* –  
 Sets the width of that specific carousel slider. Any unit can be used. Example: data-​width="100%"
 
-data-​height="…" – 
+*data-​height="…"* – 
 Sets the height of that specific carousel slider. Any unit can be used. Example: data-​height="150px"
 
-data-​autoplay="…" – 
+*data-​autoplay="…"* – 
 Choose wheter the carousel slider should start sliding automatically or not. true or false. Default is true. Example: data-autoplay="false"
 
-data-​speed="…" – 
+*data-​speed="…"* – 
 Choose in milliseconds how fast the transition animation between two slides is. Any integer. Default is 1000 (1sec). Example: data-speed="2000"
 Caution: data-speed should always be less than data-time
 
-data-​time="…" – 
+*data-​time="…"* – 
 Choose the time between each slide in milliseconds. Any integer. Default is 7000 (7sec). Example: data-time="3000"
 Caution: data-time should always be higher than data-speed
 
-data-​overflow="…" – 
+*data-​overflow="…"* – 
 Choose what happens if there is an overflow within a slide. Any valid CSS value. Default is auto. Example: data-time="hidden"
 
-data-​swipe="…" – 
+*data-​swipe="…"* – 
 Is swiping through with your fingers allowed (phone/tablet gesture). Default is true. Example: data-time="false"
 
 ------------------
