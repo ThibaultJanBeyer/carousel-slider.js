@@ -1,3 +1,5 @@
+![carousel-slider.js logo](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/carousel-slider-logo.png)
+
 # carousel-slider.js
 
 	* VERSION: 0.1.0
