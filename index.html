@@ -3,156 +3,425 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>carousel slider .js - 0.0.5</title>
-	<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+	<title>carousel slider .js - 0.1</title>
 	<style type="text/css">
-	body{
-  		margin: 0;
-  		font-family: 'Arvo', serif;
-  		color: white;
+	@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,700,300);
+	@import url(https://fonts.googleapis.com/css?family=Grand+Hotel);
+	@import url(https://fonts.googleapis.com/css?family=Fira+Mono);
+	html, body{ height: 100%; width: 100%; margin: 0; padding: 0;}
+	body{ font-weight: 400; color: #333; background-color: #FFF; -moz-osx-font-smoothing: grayscale; text-rendering: optimizelegibility; font-feature-settings: "liga", "kern"; font-family: 'Fira Sans', sans-serif; }
+	h2{ font-family: 'Grand Hotel', cursive; }
+	.navbar { padding-top: 20px; }
+	.navbar .navbar-links .navbar-link { padding: 0px 15px; border-right: 1px solid rgba(255, 255, 255, 0.3); }
+	.navbar .navbar-links .navbar-link:last-child { border-right: medium none; }
+	.main-header { height: 85%; width: 100%; min-height: 450px; color: #FFF; text-align: center; background-color: #C44B48; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+	a{ color: white; text-decoration: none; } a:hover{ color: white; text-decoration: underline; }
+	td a,ul a { color: lightskyblue; } td a:hover, ul a:hover { color:blue; }
+	.main-header-content { position: absolute; transform-style: preserve-3d; top: 48%; left: 50%; transform: translate(-50%, -50%); }
+	#logo{ width: 150px; } #logo path { fill: white; }
+	.main-header-btn { padding: 10px; text-transform: uppercase; display: inline-block; font-weight: bold; margin: 35px; transition: all 0.1s linear; transform: translateZ(0); background: linear-gradient(to bottom, #17b6fe, #03A9F4); box-shadow: 0px 0px 1px #1199d7, 0px 1px 1px #0c6f9c, 0px 1px 1px #1199d7, 0px 2px 1px #0c6f9c, 0px 2px 1px #1199d7, 0px 3px 1px #0c6f9c, 0px 3px 1px #1199d7, 0px 4px 1px #0c6f9c, 0px 4px 1px #1199d7, 0px 5px 1px #0c6f9c, 0px 5px 1px #1199d7, 0px 7px 0 rgba(0, 0, 0, 0.05), 0px 8px 0 rgba(0, 0, 0, 0.05), 0px 9px 0 rgba(0, 0, 0, 0.04), 0px 10px 0 rgba(0, 0, 0, 0.04), 0px 11px 0 rgba(0, 0, 0, 0.03), 0px 12px 0 rgba(0, 0, 0, 0.03), 0px 13px 0 rgba(0, 0, 0, 0.02), 0px 14px 0 rgba(0, 0, 0, 0.02), 0px 15px 0 rgba(0, 0, 0, 0.01), 0px 16px 0 rgba(0, 0, 0, 0.01), 0px 17px 0 rgba(0, 0, 0, 0.01), 0px 18px 0 rgba(0, 0, 0, 0.01), inset 0 4px 5px -2px rgba(255, 255, 255, 0.5), inset 0 1px 0 0 rgba(0, 0, 0, 0.3); }
+	.main-header-btn:active { box-shadow: inset 1px 2px 3px rgba(0,0,0,0.2); transform: translate3d(0px, 6px, 0); }
+	.dl{ width: 1.35em; height: 1em; vertical-align: top; padding-left: 0.3em;} .dl path { fill: white; }
+	.main-info{ max-width: 1024px; margin: 0 auto; min-height: 400px; }
+	.benefits{ padding: 0 50px 25px 50px; }
+	.benefit{ float: left; width: 47.5%; margin-top: 40px; margin-right: 2%; height: 120px; } .benefits .benefit:nth-child(2n) { margin-right: 0%; float: right; }
+	.benefit-text{ color: #7F8C8D; }
+	@media screen and (max-width: 600px) {
+		.benefit { float: none; width: 100%; height: inherit; margin: 0; padding: 20px 0;}
 	}
-	a{
-		color: white;
-		text-decoration: underline;
-	}
-	.prettyprint{
-		overflow: auto;
-	}
-	a:hover{
-		color: blue;
-		text-decoration: underline;
-	}
-	.content{
-		padding: 10px 6vw;
-	}
-	.prettyprint{
-		background: white;
-		width: 100%;
-		padding: 10px;
-	}
-	.pause{
-	position: fixed;
-	bottom: 5px;
-	right: 40px;
-	z-index: 99;
-	cursor: pointer;
-	}
-	.play{
-	position: fixed;
-	bottom: 5px;
-	right: 40px;
-	z-index: 99;
-	cursor: pointer;
-	}
+	.documentation{ max-width: 550px; margin: 0 auto; padding: 0 25px;} .documentation h3{ text-align: center; font-size: 2.5em; margin-bottom: 0; margin-top:15px;} .documentation h4{ font-size: 1.5em; margin-top: 1em; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 1em; }
+	.typewriter{ text-align: center; } #typewriter{ width: 67%; }
+	.doc-navigation{ position: absolute; left: 0; width: 135px; background: white; font-size: 0.8em; padding:10px 10px 10px 0; } .doc-navigation ul{ list-style-type: none; padding:0; margin:0; }
+	table{ width: 100%; } td{ border-top: 1px solid rgba(0,0,0,0.2); vertical-align: top; padding:2% 1%;}
+
+	.prettyprint{ overflow: auto; width: 95%; padding: 10px; font-family: 'Fira Mono', sans-serif; font-size: 0.8em; }
+
+	.footer{ height: 60px; margin-top:50px; width: 100%; color: #FFF; text-align: center; background-color: #C44B48; box-shadow: 0 -2px 4px rgba(0,0,0,0.3); }
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </head>
 <body>
-	<div class="carousel" data-width="80%" data-height="100%">
-				<div class="inner">
-					<div class="slide" style="background: #e74c3c" tabindex="1">
-						<div class="content">
-							<h3>The carousel-slider.js</h3>
-							<p>a simple but awesome carousel slider</p>
-							<h4>Key-Features:</h4>
-							<ul>
-								<li>Responsive & Mobile-Friendly</li>
-								<li>With swipe gestures built in (optional)</li>
-								<li>Keyboard supported (arrows & space)</li>
-								<li>Multiple sliders on the same Page</li>
-								<li>Open Source</li>
-								<li>Light (Only ~6 KB in min)</li>
-								<li>Easy to implement</li>
-								<li>Easy Fullscreen</li>
-								<li>Customizable</li>
-								<li>Crossbrowser (Chrome, Safari, Opera, Firefox & even IE)</li>
-								<li>Slide just anything</li>
-								<li>Free for ever & everything.</li>
-							</ul>
-							<p><br><br><a href="carousel-slider.js.zip" target="_blank">DOWNLOAD</a> v.0.0.5</p>
-							<p><br>By <a href="http://thibaultjanbeyer.com/" target="_blank">Thibault Jan Beyer</a> on <a href="https://github.com/ThibaultJanBeyer/carousel-slider.js/" target="_blank">Github</a></p>
-						</div>
-					</div>
-					<div class="slide" style="background: #34495e" tabindex="2">
-						<div class="content">
-							<h3>Install</h3>
-							<p>First add jQuery to your header:</p>
-<xmp class="prettyprint lang-html"><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-</xmp>
-							<p>Just download the clslider.js and link it to your documents after jquery (full control):</p>
-<xmp class="prettyprint lang-html"><script src="yourfolder/cls.min.js"></script>
-</xmp>
-							<p>OR just use this link if you don't want to install anything (easy setup):</p>
-<xmp class="prettyprint lang-html"><script src="http://kit.thibaultjanbeyer.com/tools/carousel-slider/cls.min.js"></script>
-</xmp>
-							<p>This is the basic html Markup you'll need:</p>
-<xmp class="prettyprint lang-html"><div class="carousel"  data-clWidth="100" data-clHeight="100">
-	<div class="inner">
-		<div class="slide" style="background: red">
-			<h3>Page 1</h3>
-		</div>
-		<div class="slide" style="background: orange">
-			<h3>Page 2</h3>
-		</div>
-		<div class="slide" style="background: yellow">
-			<h3>Page 3</h3>
+	<div class="main-header">
+		<nav class="navbar">
+			<div class="navbar-links">
+				<a href="#documentation" class="navbar-link">Documentation</a>
+				<a href="https://github.com/ThibaultJanBeyer/carousel-slider.js" class="navbar-link">Github</a>
+				<a href="https://thibaultjanbeyer.com/" class="navbar-link">Thibault Jan Beyer</a>
+			</div>
+		</nav>
+		<div class="main-header-content">
+			<p><svg xmlns="http://www.w3.org/2000/svg" id="logo" viewBox="0 0 269.3 348.9">
+			  <path fill="#010101" d="M249.2 251.7H.2l26-22h202m-165-125v40.7c-1 0-2-.1-3-.1-2.5-.1-4.4-.2-6-.4v-40.2h9zm0 78v42h-9V183c2.4-.2 5.3-.3 8.3-.3h.7z"/>
+			  <path d="M87.3 207.5c-.2 0-.5.1-.7.1-7.8 0-8.7-25.5-12-27.7-1.4-.9-6.1-1.3-11.4-1.4h-.7c-2.8 0-5.7.1-8.3.3-4.4.3-8 .9-9.1 1.6-3.1 1.9-4.8 27.2-12.4 27.2-.3 0-.7 0-1.1-.2-6.5-2 0-27.5 0-27.5-6.7-3.1-5.9-31.7-10.1-31.7-.2 0-.4.1-.7.2-4.2 2.5-8 3.6-11.1 3.6-3.8 0-6.8-1.5-8.9-3.6-5.4-5.4 20-24 20-24l.8-9.3s1.8-.4 4.4-.4c5.2 0 13.6 1.7 15.7 12.2 3 15.5 3.9 12.6 5.7 16.3 1.2 2.5-1.2 3.8-1.2 3.8s-2 1.5 8.1 2.4c1.6.1 3.6.3 5.9.4 1.1 0 2.1 0 3.1.1.8 0 1.5.1 2.2.2-.8 1.1-1.6 2.2-2.2 3.2-.9 1.6-1.5 3.2-1.6 4.8-.2 1.9.4 3.7 1.6 5.1.1.1.2.3.4.4 3.2 3.2 7.3 4.8 11.9 4.8 3.2 0 6.6-.8 10.1-2.5.5 2.2 1 5.3 1.3 7.6.3 1.9.6 3.8.9 5.6.3 1.9.7 3.7 1.1 5.4.1.3.1.6.2.9 0 .1 0 .2.1.3 1.7 7.8 3.8 20.7-2 21.8z"/>
+			  <path fill="#010101" d="M197.2 104.7v40.8c-1.4-.1-2.9-.2-4.4-.2-1.8-.1-3.3-.2-4.6-.3v-40.4h9zm-2.1 78h2.1v41.9h-9v-41.8c2.1 0 4.4-.1 6.9-.1z"/>
+			  <path fill="#030303" d="M172.9 195.3c-1.8 6.3-4.1 12.2-7.7 12.2-.4 0-.7 0-1.1-.2-3.8-1.2-3.2-10.1-2-17.5 2.3 3.5 6 5.4 10.8 5.5z"/>
+			  <path d="M240.2 179.1c-3.5 0-7.1-1.2-8.7-5.4-2.9-7.3-4.7-11-7.4-11.2 1.8 2.8 2.6 5.5 2.5 7.6-.2 7-6.8 9-6.8 9s8.5 26.8 0 28.4c-.2 0-.5.1-.7.1-7.8 0-8.7-25.5-12.1-27.7-1.3-.8-5.3-1.3-10-1.4h-2.1c-2.3 0-4.7.1-6.9.2-3.8.2-7.2.6-9.2 1.2-.4-1.8-.5-4.4-.4-8.1.2-7.4.4-18.6-11.9-21.7-1.9-.5-3.8-.7-5.5-.7-1.9 0-3.7.3-5.4.8-.5-1.3-1-2.1-1.8-2.1-.2 0-.4.1-.7.2-4.2 2.5-8 3.6-11.1 3.6-3.8 0-6.8-1.5-8.9-3.6-5.4-5.4 20-24 20-24l.8-9.3s1.8-.4 4.4-.4c5.3 0 13.6 1.7 15.7 12.2 3 15.5 3.9 12.6 5.7 16.3 1.2 2.5-1.2 3.8-1.2 3.8s-2.2 1.6 9.5 2.5c1.3.1 2.8.2 4.5.3 1.6 0 3.1.1 4.5.2 6.8.5 12.2 2 16.5 4 1.9-5.4 6-12.2 14.3-12.2 1.4 0 2.9.2 4.5.6 17.8 4.5-.4 30.2 16.8 34 1.2.2-3.8 2.8-8.9 2.8zm-110-74.4v52.8c-1.4-.1-2.8-.2-4.2-.2-1.9-.1-3.5-.2-4.8-.3v-52.3h9z"/>
+			  <path fill="#010101" d="M130.2 194.8v29.9h-9V195c2.1-.1 4.6-.2 7.1-.2.7-.1 1.3-.1 1.9 0z"/>
+			  <path fill="#030303" d="M93 183.6c-.2-.9-.4-1.6-.6-2.3l.1-.1c.1.8.3 1.6.5 2.4z"/>
+			  <path d="M178.6 190.3c-.7.2-1.5.4-2.3.5-.7.1-1.5.2-2.3.2h-.6c-3.5 0-7.1-1.2-8.7-5.4-.4-1.1-.9-2.1-1.3-3.1-1.8-4.3-3.3-6.9-5-7.8-.4-.2-.7-.3-1.1-.3 1.8 2.8 2.6 5.5 2.5 7.6-.1 2.2-.8 3.8-1.7 5.1-2 2.9-5.1 3.9-5.1 3.9s8.5 26.8 0 28.3c-.2 0-.5.1-.7.1-7.8 0-8.6-25.5-12-27.7-1.3-.9-5.4-1.3-10.2-1.4h-1.9c-2.4 0-4.8.1-7.1.2-4.9.3-9.1.9-10.3 1.7-3.1 1.9-4.8 27.2-12.4 27.2-.3 0-.7 0-1.1-.2-6.5-2 0-27.5 0-27.5-1.9-.9-3.2-3.8-4.1-7.5-.1-.3-.1-.5-.2-.8-.2-.8-.4-1.6-.5-2.4-.2-.8-.3-1.6-.5-2.4-.1-.8-.3-1.7-.4-2.5-1.3-8.1-2.1-16.2-4.4-16.2-.2 0-.4.1-.6.2-4.2 2.5-8 3.6-11.2 3.6-3.8 0-6.8-1.5-8.9-3.6-2-2 .2-5.8 3.8-9.8.5-.6 1.1-1.2 1.7-1.8l1.8-1.8c5.8-5.6 12.7-10.6 12.7-10.6l.8-9.3s1.8-.4 4.3-.4c5.2 0 13.6 1.7 15.7 12.2.2 1 .4 2 .6 2.8.4 2.1.8 3.8 1.2 5.1.5 1.2.9 2.4 1.2 3.7.9 2.3 1.6 2.4 2.6 4.1.1.1.2.3.2.5.7 1.3.3 2.3-.2 2.9-.5.5-1 .8-1 .8s-.8.5 1 1.2c1.2.4 3.6.9 8.4 1.3 1.4.1 2.9.2 4.7.3 1.5 0 2.9.1 4.3.2 6.9.5 12.4 2 16.7 4.1 1.1-3.1 3-6.8 6-9.3.6-.5 1.2-.9 1.9-1.3.6-.4 1.3-.7 2-.9 1.3-.5 2.8-.7 4.4-.7 1.4 0 2.9.2 4.5.6 14.3 3.6 5.4 20.9 10.2 29.5.4.8 1 1.4 1.6 2 .5.5 1.1.9 1.8 1.3.9.5 1.9.8 3.1 1.1.6.5-1.2 1.6-3.9 2.4z"/>
+			  <path fill="#FFF" d="M92.5 181.2c-.1 0-.1 0 0 0 .1.8.3 1.5.5 2.4-.2-.8-.4-1.6-.5-2.4zm0 0c-.1 0-.1 0 0 0 .1.8.3 1.5.5 2.4-.2-.8-.4-1.6-.5-2.4zm0 0c-.1 0-.1 0 0 0 .1.8.3 1.5.5 2.4-.2-.8-.4-1.6-.5-2.4zm0 0c-.1 0-.1 0 0 0 .1.8.3 1.5.5 2.4-.2-.8-.4-1.6-.5-2.4z"/>
+			  <path fill="#010101" d="M0 90.9h249.2v9H0zm249.2-13.6v9H0v-9h16.1C68.2 71.1 125.2.1 125.3 0c.1.1 57.1 71.1 109.2 77.3h14.7z"/>
+			  <path d="M23.5 289.4c-2 1.5-3.9 2.8-6.6 2.8-4.5 0-7.5-3.5-7.5-11.7 0-8.3 3-11.8 7.3-11.8 2.4 0 4.3.9 6.1 2.4l3.9-4.7c-2.8-2.3-5.9-3.7-10.5-3.7-8.7 0-15.3 6.4-15.3 17.7 0 11.6 6.2 17.9 15.5 17.9 4.7 0 8.4-2.1 10.6-4.4l-3.5-4.5zm23.4-25.8h-9.8l-10.2 34h8.3l1.7-7.3h10l1.7 7.3h8.5l-10.2-34zm-8.6 20.9l3.6-15 3.6 15h-7.2zm39.9-1.4c4.4-2.1 6.5-4.7 6.5-9.2 0-7.1-4.8-10.3-14-10.3H59.6v34h8v-13h3.1l7 13h9.1l-8.6-14.5zm-7.2-4h-3.4v-9.8h2.9c4 0 5.9 1.4 5.9 4.7 0 3.6-1.9 5.1-5.4 5.1zm32.1-16.3c-9.5 0-15.3 6.7-15.3 17.8 0 11.3 5.7 17.8 15.3 17.8 9.6 0 15.3-6.7 15.3-17.8 0-11.3-5.7-17.8-15.3-17.8zm0 29.8c-4.4 0-6.9-3.3-6.9-12 0-8.6 2.3-11.9 6.9-11.9 4.6 0 6.9 3.3 6.9 11.9 0 8.6-2.3 12-6.9 12zm38.1-29V286c0 4.4-1.6 6.5-5.2 6.5s-5.2-2.1-5.2-6.5v-22.3h-8v22.7c0 7.2 4.4 12.1 13.2 12.1s13.3-5.2 13.3-12.1v-22.7h-8.1zm27.4 13.1c-5.3-1.7-6.6-2.5-6.6-4.7s1.8-3.3 4.5-3.3c2.8 0 5.1.9 7.5 2.8l3.7-4.4c-3-2.8-6.6-4.4-11.8-4.4-7.1 0-12.2 3.8-12.2 9.8 0 5 2.8 8.2 10.4 10.5 5 1.5 6.2 2.7 6.2 5.1 0 2.6-2.1 4.2-5.4 4.2-3.4 0-6.1-1.2-8.6-3.3l-4.1 4.5c2.8 2.7 7 4.9 12.9 4.9 8.5 0 13.5-4.4 13.5-10.7.1-6.3-3.6-8.9-10-11zm22.6 6.4h10.4v-5.6h-10.4v-8.1h12l.8-5.7h-20.8v34H204v-5.8h-12.8v-8.8zm25.7 8.1v-27.6h-8v34h20.4l.8-6.4h-13.2zm14.1-11.9v6h15.6v-6H231zm-91.9 35.6c-1.7-5.6 2.6-12.8 8.3-14.5 3-.9 4.9.6 5.7 3.4.7 2.2 1 6.5-6 9.8l1.1 1.5c1.7-.7 12.2-4.6 9.8-12.5-1.5-4.8-6-5.9-11.8-4.2-9.1 2.7-13.9 10.3-11.7 17.7 2.4 8 14.4 11.4 16.5 18.2 1.4 4.6-1.5 9.7-6.7 11.3-3.8 1.2-6.1-.7-6.8-3-.6-1.9 0-3.8 2.5-4.5.2-.1.6-.2.9-.2v-2.4c-.6 0-1.4.2-2 .4-4.5 1.4-6.3 5.2-5.3 8.5 1.3 4.3 6.1 5.1 12 3.4 8.9-2.7 11.7-9 10-14.7-2.2-7.2-14.7-12-16.5-18.2z"/>
+			  <path fill="#010101" d="M233.4 313.4c-1 3.8-3.5 6.9-5.9 7.7-1.2.3-1.6 0-1.8-.5-.1-.3-.1-.6-.1-.9l.9-10.8v-1.1c-.4-1.3-1.6-1.5-3-1.1-1.9.6-2.7 2-4.9 3.5-.1-.2-.1-.5-.2-.8-.6-2-2.1-3.4-4.4-2.7-2.5.8-3.6 3.2-3 5.3.8 2.5 3 2.7 5.4 2-.1 1.7-.5 3.3-.9 4.8l-.2.7c-1.3 3.9-3.7 6.3-6.5 7.1-2.4.7-4.1.1-5.2-1.7l1.5-.3c4.5-1.4 7.1-5.9 6-9.4-.8-2.7-3.4-3.8-6.6-2.8-5.1 1.5-8.3 7.4-6.7 12.5.2.9.6 1.6 1 2.2-1.2 2-2.8 3.4-4.4 3.9-1.2.3-1.6 0-1.8-.5-.1-.2-.1-.6-.1-.9l2.6-29.1c-.1-.1-.5-.1-.9 0-1 .3-3.3 1.6-3.4 2.1l-1.5 16.1c-.9-1.1-3-.9-4.6-.4-5.8 1.8-9.7 8.8-8.1 14.1.2.6.4 1.1.7 1.5-1.2 1.7-2.6 3-4.1 3.4-1.2.3-1.6 0-1.8-.5-.1-.2-.1-.6-.1-.9l1.2-13.7c-.2-.1-.5-.1-.9 0-1 .3-3.3 1.6-3.4 2.1l-1.1 11.7c0 .5 0 .9.1 1.3-1.1 1.4-2.3 2.4-3.6 2.8-1.2.3-1.6 0-1.8-.5-.1-.3-.1-.6-.1-.9l2.6-29.1c-.1-.1-.5-.1-.9 0-1 .3-3.3 1.6-3.4 2.1l-2.5 27.1c0 .6 0 1.2.2 1.7.6 1.9 2.5 2.8 5.4 1.9 2-.6 3.7-1.8 5.1-3.3 1 .8 2.5 1 4.5.5 2.3-.7 4.4-2.3 5.8-4.2 1.4 1.1 3.4 1.5 5.6.8 1.9-.6 3.7-1.7 4.6-4.1.8 1.4 2.6 1.9 5 1.1 2.6-.8 4.8-2.6 6.3-4.8 2.3 1.6 5.6 1.3 8.1.5 3.8-1.1 7.2-3.8 9-9.5.5-1.4 1.3-3.8 1.4-6.3 1.3-.5 2.5-1.3 3.3-1.8l-.8 8.4c0 .6-.2 1.3 0 1.8.6 2.1 2.8 2.7 5.6 1.9 4-1.2 7-4.8 8.1-8.6l.2-.7-1.5-.7zm-17.5-1.9c-1.2.4-2.2.2-2.5-1-.2-.8 0-1.8 1-2.1.8-.2 1.3.4 1.6 1.5.2.5.2 1 .3 1.5l-.4.1zm-26.6 9.5l-.7 8.2c-.2 1.8-1.1 3.3-3 3.9-1.8.6-3.2-.2-3.9-2.6-1.3-4.4 1.1-9.6 4.5-10.6 1.1-.3 2.8-.3 3.1.6v.5zm16.4-7.1c1.1-.3 1.7.1 2.2 1.5 1 3.5-1.1 6.5-3.9 7.4-.4.1-.8.2-1.2.2-1-3.7.1-8.3 2.9-9.1z"/>
+			  <path d="M173.8 315.2c-1.3.4-2.6.1-3.7.4-.3.1-.7.3-1 .5l-.3 3.5c.2 0 .5-.1.7-.2 2.1-.6 5-2.4 4.8-4.5-.1.2-.3.2-.5.3zm66.8.6c-.3-1.1-1.2-1.5-2.2-1.1-1.4.4-2.4 2-1.9 3.7.4 1.2 1.1 1.9 2.1 1.6 1.7-.5 2.4-2.8 2-4.2zm9.2-23.5c-1.3.4-2.6.1-3.7.4-.4.1-.7.3-1 .5l-.3 3.5c.2 0 .5-.1.7-.2 2.1-.6 5-2.4 4.8-4.5-.2.2-.3.3-.5.3z"/>
+			  <path fill="#010101" d="M269.1 304c-1.8-6-10.5-3.2-13.4-6.7-.1-.1-.6-.1-.9 0-1.2.3-3.4 1.6-3.5 2.1.6 1 1.4 1.7 2.5 2.2.8.4 1.2.9 1.3 1.5.3 1.3-.2 2.7-.5 3.9v.1h-.1c-.7 3-2.3 6.1-4 8.3-1.1 1.4-2.2 2.4-3.7 3.4l1.7-19.4c-.1-.1-.4-.1-.7-.1-2.8.9-4.5 1.6-6.4 3.8l-.2 2c1-.8 1.8-1.2 2.8-1.6l-1.6 18.2c-4.3 2.8-10.7 7.6-9.2 12.6.8 2.5 3 3.2 5.8 2.3 2.2-.7 6.4-2.8 7-9.1l.6-6c1.7-1.1 3.8-2.6 5.4-4.6 1.7-2.1 3-5.1 4.2-8.2v-.1l.2-.7c.6-2.2.9-3.4.6-4.9 3.7.9 7.7 1.2 8.3 3.4.8 2.5-.7 4.3-2.5 4.9-1.3.4-2.6-.1-3-1.3-.3-.9-.1-1.6.5-2.2l-1.3-.9c-.9 1.1-1.3 2.3-.9 3.6.7 2.3 2.9 2.9 5.2 2.2 5-1.7 6.7-5.7 5.8-8.7zm-26.9 21.3c-.4 4.2-.4 8.8-3.7 9.7-1.7.5-2.8-.3-3.2-1.5-1-3.2 3.2-6.9 6.9-9.4v1.2z"/>
+			</svg></p>
+			<!--<p class="main-header-text"><em>Free ponyrides for all</em></p>-->
+			<p><a class="main-header-btn" href="cls.min.js">
+				Download
+			</a></p>
 		</div>
 	</div>
-	<div class="arrow left"></div>
-	<div class="arrow right"></div>
+	<div class="main-info">
+		<div class="main-info-content">
+			<div class="benefits">
+				<div class="benefit">
+					<h2 class="benefit-title">Mobile friendly</h2>
+					<p class="benefit-text">Carousel-Slider.js is made to fit any window size like a charm. It even comes with keyboard support and swipe gestures built in.</p>
+				</div>
+				<div class="benefit">
+					<h2 class="benefit-title">Ease of use</h2>
+					<p class="benefit-text">Your time matters, so I made Carousel-Slider.js super quick and easy to use. If you know HTML you're ready to rock.</p>
+				</div>
+				<div class="benefit">
+					<h2 class="benefit-title">Light</h2>
+					<p class="benefit-text">You want your website to be loaded as fast as possible. Carousel-Slider.js only weights ~6KB which is an average of 0,0001s loadtime. You name it – it's nothing.</p>
+				</div>
+				<div class="benefit">
+					<h2 class="benefit-title">Free</h2>
+					<p class="benefit-text">The things that matter the most in your life are free. That's one of many reasons why this slider is free. Oh and it's Open Source as well, so you can make it even better.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="documentation" class="documentation">
+		<div class="typewriter"><img src="typewriter.gif" alt="animated typewriter gif" id="typewriter"></div>
+		<h3>Documentation</h3>
+		<div class="doc-navigation sticky">
+			<ul>
+				<li>
+					<a href="#one">1. Installation</a>
+				</li>
+				<li>
+					<a href="#two">2. Basic Slider</a>
+					<li>
+						<a href="#twob">2b. Without controls</a>
+					</li>
+					<li>
+						<a href="#twoc">2c. Image Slider</a>
+					</li>
+					<li>
+						<a href="#twod">2d. Slider within slider</a>
+					</li>
+				</li>
+				<li>
+					<a href="#three">3. Custom Attributes</a>
+				</li>
+			</ul>
+		</div>
+		<h4 id="one">1. Installation</h4>
+		<p>Carousel-Slider.js requires jQuery. Add jQuery and the Carousel-Slider.js to your document:</p>
+<xmp class="prettyprint lang-html" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);"><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/cls.min.js"></script>
+</xmp>
+		<p>That's it, you're ready to rock!</p>
+		<br>
+		<h4 id="two">2. Basic Slider</h4>
+		<div class="carousel-slider"  data-width="250px" data-height="150px">
+			<div class="inner">
+				<div class="slide" style="background:lightblue">
+					<div class="content">
+						<p>Page 1</p>
+					</div>
+				</div>
+				<div class="slide" style="background:lightgreen">
+					<div class="content">
+						<p>Page 2</p>
+					</div>
+				</div>
+			</div>
+			<div class="arrow left"> < </div>
+			<div class="arrow right"> > </div>
+			<p class="pause">Pause</p>
+			<p class="play">Play</p>
+		</div>
+		<p>In your HTML create the Carousel Slider like so:</p>
+<xmp class="prettyprint lang-html" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-slider"  data-width="250px" data-height="150px">
+	<div class="inner">
+		<div class="slide" style="background:lightblue">
+			<div class="content">
+				<p>Page 1</p>
+			</div>
+		</div>
+		<div class="slide" style="background:lightgreen">
+			<div class="content">
+				<p>Page 2</p>
+			</div>
+		</div>
+	</div>
+	<div class="arrow left"> < </div>
+	<div class="arrow right"> > </div>
 	<p class="pause">Pause</p>
 	<p class="play">Play</p>
 </div>
 </xmp>
-							<p>To change the width and/or the height, just change the values of data-clWidth="100" data-clHeight="100" to what ever you want.</p>
-							<p>Note: if you do not need pause/play buttons or even pages, just add/remove them in html.</p>
-							<strong>That's it! You're ready to rock!</strong>
-						</div>
+		<p>In a nutshell:</p>
+		<ul>
+			<li>The class <span class="atv">"carousel-slider"</span> indicates that this box is out slider.</li>
+			<li><span class="atn">data-width</span> and <span class="atn">data-height</span> let you choose the width and height of the slider, you're not limited to px, use any unit you want. (you can always set this in CSS as well)</li>
+			<li><span class="atv">"slide"</span> are your actual slides, color the background if you want. Copy and paste the <span class="tag">div</span> as many times as you want to add more slides.</li>
+			<li>And place all your content for a specific slide within the <span class="atv">"content"</span> <span class="tag">div</span> it does not matter what tipe of content you're using, everything will work (img, divs, iframes, svg, lists, etc etc)</li>
+			<li><span class="atv">"arrow left"</span> and <span class="atv">"arrow right"</span> is the space left and right where, when you hover it, you see a part of the other slide. If you don't want to have them, you can just omit those two <span class="tag">div</span>'s.</li>
+			<li><span class="atv">"pause"</span> and <span class="atv">"play"</span> are buttons for pause and play, style them how ever you want them to have in css or replace the html text. If you don't want to have play/pause buttons just omit those two <span class="tag">div</span>'s.</li>
+		</ul>
+		<br>
+		<h4 id="twob">2b. Without controls</h4>
+		<div class="carousel-slider"  data-width="50%" data-height="150px">
+			<div class="inner">
+				<div class="slide" style="background:lightblue">
+					<div class="content">
+						<p>Page 1</p>
 					</div>
-					<div class="slide" style="background: #27ae60" tabindex="3">
-						<div class="content">
-							<h3>Customisation</h3>
-							<p>Change the whole width and height (keep vw and vh as units for responsive). Aswell as the animation speed and automatic slide speed (you can also set clAutoPlay to "false").</p>
-<xmp class="prettyprint lang-js">// Options
-var clAnimationSpeed = 800;
-// Speed of animations in ms
-var clAutoPlay = true;
-// Choose if the slider automatically slides
-var clSpeed = 5000;
-// Time between automatic sliding in ms
-var clSlideOverflow = 'auto';
-// Set what happens when there is overflow (basic css)
-var clSwiping = true;
-// Choose if swipe gestures for mobile shall be enabled
-var clUnit = 'vw';
-// choose a measuring unit vw = % of Viewport Width (vw = best)
-var clHeightUnit = 'vh'
-// choose a measuring unit vh = % of Viewport Height (vh = best)
+				</div>
+				<div class="slide" style="background:lightgreen">
+					<div class="content">
+						<p>Page 2</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p>HTML code:</p>
+<xmp class="prettyprint lang-html" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-slider"  data-width="50%" data-height="150px">
+	<div class="inner">
+		<div class="slide" style="background:lightblue">
+			<div class="content">
+				<p>Page 1</p>
+			</div>
+		</div>
+		<div class="slide" style="background:lightgreen">
+			<div class="content">
+				<p>Page 2</p>
+			</div>
+		</div>
+	</div>
+</div>
 </xmp>
-							<p>Note: you can change the width and/or height of your slider in html now. Look for data-clWidth="100" data-clHeight="100".</p>
-							<p>In some cases you might use your own Markup (advanced users):</p>
-<xmp class="prettyprint lang-js">// Find your stuff
-$cl[i] = $(this);
-$clInner[i] = $(this).find('.inner');
-$clSlides[i] = $(this).find('.slide');
-$clArrows[i] = $(this).find('.arrow');
-$clArrowLeft[i] = $(this).find('.arrow.left');
-$clArrowRight[i] = $(this).find('.arrow.right');
-$clPauseAutoPlay[i] = $(this).find('.pause');
-$clPlayAutoPlay[i] = $(this).find('.play');
+		<br>
+		<h4 id="twoc">2c. Image Slider</h4>
+		<div class="carousel-slider"  data-width="40vw" data-height="150px">
+			<div class="inner">
+				<div class="slide" style="background:url('Free1.jpg'); background-size: cover"></div>
+				<div class="slide" style="background:url('Free2.jpg'); background-size: cover"></div>
+				<div class="slide" style="background:url('Free3.jpg'); background-size: cover">
+					<div class="content" style="color:white">Text on an image</div>
+				</div>
+			</div>
+			<div class="arrow left"></div>
+			<div class="arrow right"></div>
+		</div>
+		<p>Creating an image slider is fairly easy, just use them as background Images in CSS:</p>
+<xmp class="prettyprint lang-html" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-slider"  data-width="40vw" data-height="150px">
+	<div class="inner">
+		<div class="slide" style="background:url('Free1.jpg'); background-size: cover"></div>
+		<div class="slide" style="background:url('Free2.jpg'); background-size: cover"></div>
+		<div class="slide" style="background:url('Free3.jpg'); background-size: cover">
+			<div class="content" style="color:white">Text on an image</div>
+		</div>
+	</div>
+	<div class="arrow left"></div>
+	<div class="arrow right"></div>
+</div>
 </xmp>
-							<p>Styling is no problem, just use regular CSS. But in some case you might want to change the preset styles. If you know basics in Jquery it is also supereasy.</p>
+		<p>You could also add them as <span class="tag">img</span> tag withing the <span class="atv">"content"</span> containers</p>
+		<br>
+		<h4 id="twod">2d. Slider within slider</h4>
+		<div class="carousel-slider"  data-width="100%" data-height="250px" data-autoplay="false">
+			<div class="inner">
+				<div class="slide" style="background:lightblue">
+					<div class="content">
+						<p>Page 1</p>
+						<div class="carousel-slider"  data-width="100%" data-height="100px">
+							<div class="inner">
+								<div class="slide" style="background:yellow">
+									<div class="content">
+										<p>Page 1.1</p>
+									</div>
+								</div>
+								<div class="slide" style="background:white">
+									<div class="content">
+										<p>Page 1.2</p>
+									</div>
+								</div>
+							</div>
+							<div class="arrow left"> < </div>
+							<div class="arrow right"> > </div>
+							<p class="pause">Pause</p>
+							<p class="play">Play</p>
 						</div>
 					</div>
 				</div>
-				<div class="arrow left"></div>
-    			<div class="arrow right"></div>
-    			<p class="pause">Pause</p>
-    			<p class="play">Play</p>
+				<div class="slide" style="background:lightgreen">
+					<div class="content">
+						<p>Page 2</p>
+					</div>
+				</div>
 			</div>
-
-
+			<div class="arrow left"> < </div>
+			<div class="arrow right"> > </div>
+			<p class="pause">Pause</p>
+			<p class="play">Play</p>
+		</div>
+		<p>To add a carousel slider within a carousel slider is fairly easy, as I wrote before, you can add anything you want into a slide even another carousel slider. Check out the code:</p>
+<xmp class="prettyprint lang-html" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-slider"  data-width="100%" data-height="250px" data-autoplay="false">
+	<div class="inner">
+		<div class="slide" style="background:lightblue">
+			<div class="content">
+				<p>Page 1</p>
+				<div class="carousel-slider"  data-width="100%" data-height="100px">
+					<div class="inner">
+						<div class="slide" style="background:yellow">
+							<div class="content">
+								<p>Page 1.1</p>
+							</div>
+						</div>
+						<div class="slide" style="background:white">
+							<div class="content">
+								<p>Page 1.2</p>
+							</div>
+						</div>
+					</div>
+					<div class="arrow left"> < </div>
+					<div class="arrow right"> > </div>
+					<p class="pause">Pause</p>
+					<p class="play">Play</p>
+				</div>
+			</div>
+		</div>
+		<div class="slide" style="background:lightgreen">
+			<div class="content">
+				<p>Page 2</p>
+			</div>
+		</div>
+	</div>
+	<div class="arrow left"> < </div>
+	<div class="arrow right"> > </div>
+	<p class="pause">Pause</p>
+	<p class="play">Play</p>
+</div>
+</xmp>
+		<br>
+		<h4 id="three">3. Custom Attributes</h4>
+		<p>Each carousel slider has some options you can tweak with the help of attributes directly within html. Which makes every carousel slider on your page flexible. For example you could stop the autoplay function of one slider while maintaining it on the other. Here are all attributes you can use:</p>
+		<table>
+			<tr>
+				<td><span class="atn">data-&#8203;width</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td>Sets the width of that specific carousel slider. <em>Any unit can be used. Example: data-​width="<span style="color:LightCoral">100%</span>"</em></td>
+			</tr>
+			<tr>
+				<td><span class="atn">data-&#8203;height</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td>Sets the height of that specific carousel slider. <em>Any unit can be used. Example: data-​height="<span style="color:LightCoral">150px</span>"</em></td>
+			</tr>
+			<tr>
+				<td><span class="atn">data-&#8203;autoplay</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td>Choose wheter the carousel slider should start sliding automatically or not. <em>true or false. Default is true. Example: data-autoplay="<span style="color:LightCoral">false</span>"</em></td>
+			</tr>
+			<tr>
+				<td><span class="atn">data-&#8203;speed</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td>Choose in milliseconds how fast the transition animation between two slides is. <em>Any integer. Default is 1000 (1sec). Example: data-speed="<span style="color:LightCoral">2000</span>"</em><br><span style="color:LightCoral">Caution: data-speed should always be less than data-time</span></td>
+			</tr>
+			<tr>
+				<td><span class="atn">data-&#8203;time</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td>Choose the time between each slide in milliseconds. <em>Any integer. Default is 7000 (7sec). Example: data-time="<span style="color:LightCoral">3000</span>"</em><br><span style="color:LightCoral">Caution: data-time should always be higher than data-speed</span></td>
+			</tr>
+			<tr>
+				<td><span class="atn">data-&#8203;overflow</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td>Choose what happens if there is an <a href="https://css-tricks.com/almanac/properties/o/overflow/">overflow</a> within a slide. <em>Any <a href="https://css-tricks.com/almanac/properties/o/overflow/">valid CSS value</a>. Default is auto. Example: data-time="<span style="color:LightCoral">hidden</span>"</em></td>
+			</tr>
+			<tr>
+				<td style="border-bottom:1px solid rgba(0,0,0,0.2)"><span class="atn">data-&#8203;swipe</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
+				<td style="border-bottom:1px solid rgba(0,0,0,0.2)">Is swiping through with your fingers allowed (phone/tablet gesture). <em>Default is true. Example: data-time="<span style="color:LightCoral">false</span>"</em></td>
+			</tr>
+		</table>
+		<p>Here is an example using all custom attributes:</p>
+		<div data-autoplay="false" class="carousel-slider"  data-width="100%" data-height="150px" data-speed="2000" data-time="3000" data-overflow="scroll" data-swipe="true">
+			<div class="inner">
+				<div class="slide" style="background:lightblue">
+					<div class="content">
+						<p>Page 1</p>
+					</div>
+				</div>
+				<div class="slide" style="background:lightgreen">
+					<div class="content">
+						<p>Page 2</p>
+					</div>
+				</div>
+			</div>
+			<div class="arrow left"> < </div>
+			<div class="arrow right"> > </div>
+			<p class="pause">Pause</p>
+			<p class="play">Play</p>
+		</div>
+		<p>The HTML looks like this:</p>
+<xmp class="prettyprint lang-html" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);"><div data-autoplay="false" class="carousel-slider"  data-width="100%" data-height="150px" data-speed="2000" data-time="3000" data-overflow="scroll" data-swipe="true">
+	<div class="inner">
+		<div class="slide" style="background:lightblue">
+			<div class="content">
+				<p>Page 1</p>
+			</div>
+		</div>
+		<div class="slide" style="background:lightgreen">
+			<div class="content">
+				<p>Page 2</p>
+			</div>
+		</div>
+	</div>
+	<div class="arrow left"> < </div>
+	<div class="arrow right"> > </div>
+	<p class="pause">Pause</p>
+	<p class="play">Play</p>
+</div>
+</xmp>
+	<p>The order of the attributes does not matter nor are the attributes case sensitive.</p>
+	</div>
+	<div class="footer">
+		<nav class="navbar">
+			<div class="navbar-links">
+				<a href="#documentation" class="navbar-link">Documentation</a>
+				<a href="https://github.com/ThibaultJanBeyer/carousel-slider.js" class="navbar-link">Github</a>
+				<a href="https://thibaultjanbeyer.com/" class="navbar-link">Thibault Jan Beyer</a>
+			</div>
+		</nav>
+	</div>
 <script src="carousel-slider.js"></script>
+<script type="text/javascript">
+  var stickyTop = $('.sticky').offset().top; // returns number
+  console.log(stickyTop);
+  $(window).scroll(function(){ // scroll event  
+ 
+    var windowTop = $(window).scrollTop(); // returns number
+    var windowWidth = $(window).width();
+    console.log(stickyTop);
+    $(window).resize(function(event) {
+    	windowWidth = $(window).width();
+    });
+ 	
+    if (stickyTop < windowTop && windowWidth > 859) {
+      $('.sticky').css({ position: 'fixed', top: 0, paddingLeft: '10px' });
+      $('#documentation h3').css({marginBottom: '135px'});
+    }
+    else {
+      $('.sticky').css({ position:'static', paddingLeft: '0px'});
+      $('#documentation h3').css({marginBottom: '0'});
+    }
+ 
+  });
+</script>
 </body>
 </html>
