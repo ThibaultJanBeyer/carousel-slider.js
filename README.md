@@ -83,7 +83,7 @@ Customisation
 
 Each carousel slider has some options you can tweak with the help of attributes directly within html. Which makes every carousel slider on your page flexible. For example you could stop the autoplay function of one slider while maintaining it on the other. Here are all attributes you can use:
 
-data-​width="…" – 
+*data-​width="…"* – 
 Sets the width of that specific carousel slider. Any unit can be used. Example: data-​width="100%"
 
 data-​height="…" – 
