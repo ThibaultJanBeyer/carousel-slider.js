@@ -1,4 +1,4 @@
-![carousel-slider.js logo](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/carousel-slider-loo.png)
+![carousel-slider.js logo](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/carousel-slider-logo.png)
 
 # carousel-slider.js
 
