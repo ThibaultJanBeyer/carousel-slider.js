@@ -368,7 +368,7 @@ $(function(){
 
 			// Right Swipe
 			// Left Swipe
-			$clInner[i]
+			$clSlides[i]
 				.on('swiperight',  function(e){ 
 					if (clSliding[i] === false && clSwiping[i] === true) {
 						clPause();
