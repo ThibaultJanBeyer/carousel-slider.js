@@ -32,7 +32,7 @@ Key-Features
 + Crossbrowser (Chrome, Safari, Opera, Firefox & even IE +Mobile)
 + Slide just anything
 + Free for ever & everything
-
+![typewriter icon animation](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/typewriter.gif)
 
 Install
 ---------------
@@ -112,6 +112,4 @@ Check out http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/ if you need 
 
 ------------------
 Have Fun !
-
-![typewriter icon animation](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/typewriter.gif)
 
