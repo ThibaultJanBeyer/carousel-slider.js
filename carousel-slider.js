@@ -118,9 +118,9 @@ $(function(){
 			clOverflow[i] = 'auto';
 		};
 		if ($cl[i].attr('data-swipe')) {
-			clOverflow[i] = $cl[i].attr('data-swipe');
+			clSwiping[i] = $cl[i].attr('data-swipe');
 		} else {
-			clOverflow[i] = true;
+			clSwiping[i] = true;
 		};
 		// Styling the clSlider
 		$cl[i].css({
@@ -129,6 +129,7 @@ $(function(){
 			position: 'relative',
 			overflow: 'hidden',
 		});
+		$cl[i].attr("tabindex","0");
 		// We begin by checking how many slides there are
 		clSlidesNum[i] = $clSlides[i].length;//3
 		// Note that the slider will only work if there are more than one slides inside.
@@ -369,7 +370,7 @@ $(function(){
 			// Left Swipe
 			$clInner[i]
 				.on('swiperight',  function(e){ 
-					if (clSliding[i] === false && clSwiping === true) {
+					if (clSliding[i] === false && clSwiping[i] === true) {
 						clPause();
 						clSliding[i] = true;
 						$clInner[i]
@@ -387,7 +388,7 @@ $(function(){
 					};
 			 	})
 				.on('swipeleft', function(){
-					if (clSliding[i] === false && clSwiping === true) {
+					if (clSliding[i] === false && clSwiping[i] === true) {
 						clPause();
 						clSliding[i] = true;
 						$clInner[i]
@@ -406,9 +407,10 @@ $(function(){
 		       });
 
 			// Keypress within slider
-			document.addEventListener("keydown", function(ev) { 
+			$cl[i].keydown(function(ev) { 
+				ev.preventDefault();
   				if ( ev.keyCode == 39 ) { /*right*/
-  					if (clSliding[i] === false && clSwiping === true) {
+  					if (clSliding[i] === false && clSwiping[i] === true) {
   						clSliding[i] = true;
 						clPause();
 						$clInner[i]
@@ -425,7 +427,7 @@ $(function(){
 						clPlay();
 					};
      			} else if ( ev.keyCode == 37 ) { /*left*/
-					if (clSliding[i] === false && clSwiping === true) {
+					if (clSliding[i] === false && clSwiping[i] === true) {
 						clSliding[i] = true;
 						clPause();
 						$clInner[i]
