@@ -78,7 +78,6 @@ In a nutshell:
 + "arrow left" and "arrow right" is the space left and right where, when you hover it, you see a part of the other slide. If you don't want to have them, you can just omit those two div's.
 + "pause" and "play" are buttons for pause and play, style them how ever you want them to have in css or replace the html text. If you don't want to have play/pause buttons just omit those two div's.
 
-![tipewriter icon animation](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/typewriter.gif)
 
 Customisation
 ---------------------
@@ -113,4 +112,6 @@ Check out http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/ if you need 
 
 ------------------
 Have Fun !
+
+![typewriter icon animation](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/typewriter.gif)
 
