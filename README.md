@@ -47,7 +47,7 @@ That's it! You're ready to rock!
 For the basic slider markup. In your HTML create the Carousel Slider like so:
 
 ```html
-<div class="carousel-slider"  data-width="250px" data-height="150px">
+<div class="carousel-slider" data-width="250px" data-height="150px">
 	<div class="inner">
 		<div class="slide" style="background:lightblue">
 			<div class="content">
