@@ -123,6 +123,9 @@
 				<li>
 					<a href="#three">3. Custom Attributes</a>
 				</li>
+				<li>
+					<a href="#three">4. Alternate Controls</a>
+				</li>
 			</ul>
 		</div>
 		<h4 id="one">1. Installation</h4>
@@ -346,11 +349,11 @@ onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-sli
 			</tr>
 			<tr>
 				<td><span class="atn">data-&#8203;overflow</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
-				<td>Choose what happens if there is an <a href="https://css-tricks.com/almanac/properties/o/overflow/">overflow</a> within a slide. <em>Any <a href="https://css-tricks.com/almanac/properties/o/overflow/">valid CSS value</a>. Default is auto. Example: data-time="<span style="color:LightCoral">hidden</span>"</em></td>
+				<td>Choose what happens if there is an <a href="https://css-tricks.com/almanac/properties/o/overflow/">overflow</a> within a slide. <em>Any <a href="https://css-tricks.com/almanac/properties/o/overflow/">valid CSS value</a>. Default is auto. Example: data-overflow="<span style="color:LightCoral">hidden</span>"</em></td>
 			</tr>
 			<tr>
 				<td style="border-bottom:1px solid rgba(0,0,0,0.2)"><span class="atn">data-&#8203;swipe</span><span class="pun">=</span><span class="atv">"<span style="color:LightCoral">…</span>"</span></td>
-				<td style="border-bottom:1px solid rgba(0,0,0,0.2)">Is swiping through with your fingers allowed (phone/tablet gesture). <em>Default is true. Example: data-time="<span style="color:LightCoral">false</span>"</em></td>
+				<td style="border-bottom:1px solid rgba(0,0,0,0.2)">Is swiping through with your fingers allowed (phone/tablet gesture). <em>Default is true. Example: data-swipe="<span style="color:LightCoral">false</span>"</em></td>
 			</tr>
 		</table>
 		<p>Here is an example using all custom attributes:</p>
@@ -394,6 +397,46 @@ onfocus="document.execCommand('selectAll',false,null);"><div data-autoplay="fals
 </div>
 </xmp>
 	<p>The order of the attributes does not matter nor are the attributes case sensitive.</p>
+	<br>
+	<h4 id="four">4. Alternate Controls</h4>
+	<p>Unless you turned it off via <span class="atn">data-swipe</span> you can use your fingers on your mobile phone or tablet to control the carousel-slider. You can use the keyboard to control the carousel-slider as well:</p>
+	<table>
+		<tr>
+			<td colspan="2" style="text-align: center;">&#9000; Keyboard</td>
+		</tr>
+		<tr>
+			<td>&larr; left key</td>
+			<td>Slides to the left</td>
+		</tr>
+		<tr>
+			<td>&rarr; right key</td>
+			<td>Slides to the right</td>
+		</tr>
+		<tr>
+			<td>[ ] space bar</td>
+			<td>Play/Pause</td>
+		</tr>
+		<tr>
+			<td>&#8633; tab key</td>
+			<td>Select carousel sliders</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">&#9996; Gestures</td>
+		</tr>
+		<tr>
+			<td>&#9756; left swipe</td>
+			<td>Slides to the left</td>
+		</tr>
+		<tr>
+			<td>&#9758; right swipe</td>
+			<td>Slides to the right</td>
+		</tr>
+		<tr>
+			<td>&#9757; tap</td>
+			<td>on an arrow slides respective direction</td>
+		</tr>
+	</table>
+	<p>The respective carousel-slider has to be selected to read keyboard usage.</p>
 	</div>
 	<div class="footer">
 		<nav class="navbar">
