@@ -98,7 +98,7 @@ $(function(){
 		$clAttrHeight[i] = $cl[i].attr('data-height');
 		//checking the custom user options in the attributes
 		if ($cl[i].attr('data-autoplay')) {
-			clAutoPlay[i] = $cl[i].attr('data-autoplay');
+			clAutoPlay[i] = JSON.parse($cl[i].attr('data-autoplay'));
 		} else {
 			clAutoPlay[i] = true;
 		};
@@ -118,7 +118,7 @@ $(function(){
 			clOverflow[i] = 'auto';
 		};
 		if ($cl[i].attr('data-swipe')) {
-			clSwiping[i] = $cl[i].attr('data-swipe');
+			clSwiping[i] = JSON.parse($cl[i].attr('data-swipe'));
 		} else {
 			clSwiping[i] = true;
 		};

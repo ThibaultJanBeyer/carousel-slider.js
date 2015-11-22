@@ -402,12 +402,10 @@ onfocus="document.execCommand('selectAll',false,null);"><div data-autoplay="fals
 <script src="carousel-slider.js"></script>
 <script type="text/javascript">
   var stickyTop = $('.sticky').offset().top; // returns number
-  console.log(stickyTop);
   $(window).scroll(function(){ // scroll event  
  
     var windowTop = $(window).scrollTop(); // returns number
     var windowWidth = $(window).width();
-    console.log(stickyTop);
     $(window).resize(function(event) {
     	windowWidth = $(window).width();
     });
