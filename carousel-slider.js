@@ -311,8 +311,30 @@ $(function(){
 								};
 								clSliding[i] = false;
 							});
-					};	
-			});
+					}
+			})
+				.on({ 'touchstart' : function(){
+					clLeftHover[i] = true;
+					clPause();
+					if (clSliding[i] === false && clLeftHover[i] === true) {
+					clSliding[i] = true;
+					$clInner[i]
+						.animate({marginLeft: '+='+'100%'},
+							clSpeed[i],
+							function(){
+								clSlidePos[i]--;
+								if (clSlidePos[i] < 1) {
+									clSlidePos[i] = clSlidesNum[i];
+									$clInner[i].css({marginLeft: "-"+clLastPos[i]+'%'});
+								};
+								clPlay();
+								$clInner[i]
+								clLeftHoverLeave[i] = false;
+								clLeftHover[i] = false;
+								clSliding[i] = false;
+							});
+					}
+			} });
 
 			// RIGHT Setup //
 			clRightHover[i] = false;
@@ -364,7 +386,29 @@ $(function(){
 								clSliding[i] = false;
 							});
 				};
-			});
+			})
+				.on({ 'touchstart' : function(){
+					clRightHover[i] = true;
+					clPause();
+					if (clSliding[i] === false && clRightHover[i] === true) {
+					clSliding[i] = true;
+					$clInner[i]
+						.animate({marginLeft: '-='+'100%'},
+							clSpeed[i],
+							function(){
+								clSlidePos[i]++;
+								if (clSlidePos[i] > clSlidesNum[i]) {
+									clSlidePos[i] = 1;
+									$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'%'});
+								};
+								clPlay();
+								$clInner[i]
+								clRightHoverLeave[i] = false;
+								clRightHover[i] = false;
+								clSliding[i] = false;
+							});
+					}
+			} });
 
 			// Right Swipe
 			// Left Swipe
