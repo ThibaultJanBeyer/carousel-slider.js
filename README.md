@@ -85,28 +85,15 @@ Customisation
 
 Each carousel slider has some options you can tweak with the help of attributes directly within html. Which makes every carousel slider on your page flexible. For example you could stop the autoplay function of one slider while maintaining it on the other. Here are all attributes you can use:
 
-*data-​width="…"* –  
-Sets the width of that specific carousel slider. Any unit can be used. Example: data-​width="100%"
-
-*data-​height="…"* – 
-Sets the height of that specific carousel slider. Any unit can be used. Example: data-​height="150px"
-
-*data-​autoplay="…"* – 
-Choose wheter the carousel slider should start sliding automatically or not. true or false. Default is true. Example: data-autoplay="false"
-
-*data-​speed="…"* – 
-Choose in milliseconds how fast the transition animation between two slides is. Any integer. Default is 1000 (1sec). Example: data-speed="2000"
-Caution: data-speed should always be less than data-time
-
-*data-​time="…"* – 
-Choose the time between each slide in milliseconds. Any integer. Default is 7000 (7sec). Example: data-time="3000"
-Caution: data-time should always be higher than data-speed
-
-*data-​overflow="…"* – 
-Choose what happens if there is an overflow within a slide. Any valid CSS value. Default is auto. Example: data-time="hidden"
-
-*data-​swipe="…"* – 
-Is swiping through with your fingers allowed (phone/tablet gesture). Default is true. Example: data-time="false"
+Attribute	 		| Effect
+-------------		| -------------
+*data-​width="…"*	 | Sets the width of that specific carousel slider. Any unit can be used. Example: data-​width="100%"
+*data-​height="…"*	 | Sets the height of that specific carousel slider. Any unit can be used. Example: data-​height="150px"
+*data-​autoplay="…"* | Choose wheter the carousel slider should start sliding automatically or not. true or false. Default is true. Example: data-autoplay="false"
+*data-​speed="…"* 	 | Choose in milliseconds how fast the transition animation between two slides is. Any integer. Default is 1000 (1sec). Example: data-speed="2000" **Caution: data-speed should always be less than data-time**
+*data-​time="…"* 	 | Choose the time between each slide in milliseconds. Any integer. Default is 7000 (7sec). Example: data-time="3000" **Caution: data-time should always be higher than data-speed**
+*data-​overflow="…"* | Choose what happens if there is an overflow within a slide. Any valid CSS value. Default is auto. Example: data-time="hidden"
+*data-​swipe="…"* 	 | Is swiping through with your fingers allowed (phone/tablet gesture). Default is true. Example: data-time="false"
 
 Here is an example how the HTML would look like using all custom attributes:
 
@@ -141,7 +128,8 @@ Unless you turned it off via data-swipe you can use your fingers on your mobile 
 *← left key* 	| Slides to the left
 *→ right key* 	| Slides to the right
 *[ ] space bar* | Play/Pause
-✌ Gestures 		| What
+------------- 	| -------------
+**✌ Gestures 	| What**
 ------------- 	| -------------
 *↹ tab key* 	| Select carousel sliders
 *☜ left swipe*	| Slides to the left
