@@ -136,19 +136,18 @@ Alternate Controls
 
 Unless you turned it off via data-swipe you can use your fingers on your mobile phone or tablet to control the carousel-slider. You can use the keyboard to control the carousel-slider as well:
 
-*← left key* – Slides to the left
+⌨ Keyboard  	| What
+------------- 	| -------------
+*← left key* 	| Slides to the left
+*→ right key* 	| Slides to the right
+*[ ] space bar* | Play/Pause
 
-*→ right key* – Slides to the right
-
-*[ ] space bar* – Play/Pause
-
-*↹ tab key* – Select carousel sliders
-
-*☜ left swipe* – Slides to the left
-
-*☞ right swipe* – Slides to the right
-
-*☝ tap* – on an arrow slides respective direction
+✌ Gestures 		| What
+------------- 	| -------------
+*↹ tab key* 	| Select carousel sliders
+*☜ left swipe*	| Slides to the left
+*☞ right swipe* | Slides to the right
+*☝ tap* 		| on an arrow slides respective direction
 
 The respective carousel-slider has to be selected to read keyboard usage.
 
@@ -157,7 +156,7 @@ Events
 
 Carousel-Slider.js triggers events when an interaction takes place which you can use to implement further interactivity to your page.
 
-
+Events  		| When
 ------------- 	| -------------
 *cls-play*		| user click/tap on the play button or use spacebar
 *cls-pause*		| user clicks/taps on the pause button or use the spacebar
