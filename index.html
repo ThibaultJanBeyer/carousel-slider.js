@@ -82,7 +82,7 @@
 		<div class="main-info-content">
 			<div class="benefits">
 				<div class="benefit">
-					<h2 class="benefit-title">Mobile friendly</h2>
+					<h2 class="benefit-title">Responsive & Mobile friendly</h2>
 					<p class="benefit-text">Carousel-Slider.js is made to fit any window size like a charm. It even comes with keyboard support and swipe gestures built in.</p>
 				</div>
 				<div class="benefit">
@@ -125,6 +125,9 @@
 				</li>
 				<li>
 					<a href="#four">4. Alternate Controls</a>
+				</li>
+				<li>
+					<a href="#five">5. Events</a>
 				</li>
 			</ul>
 		</div>
@@ -222,9 +225,9 @@ onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-sli
 		<h4 id="twoc">2c. Image Slider</h4>
 		<div class="carousel-slider" data-width="40vw" data-height="150px">
 			<div class="inner">
-				<div class="slide" style="background:url('Free1.jpg'); background-size: cover"></div>
-				<div class="slide" style="background:url('Free2.jpg'); background-size: cover"></div>
-				<div class="slide" style="background:url('Free3.jpg'); background-size: cover">
+				<div class="slide" style="background:url('free1.jpg'); background-size: cover"></div>
+				<div class="slide" style="background:url('free2.jpg'); background-size: cover"></div>
+				<div class="slide" style="background:url('free3.jpg'); background-size: cover">
 					<div class="content" style="color:white">Text on an image</div>
 				</div>
 			</div>
@@ -235,9 +238,9 @@ onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-sli
 <xmp class="prettyprint lang-html" contenteditable="true" 
 onfocus="document.execCommand('selectAll',false,null);"><div class="carousel-slider" data-width="40vw" data-height="150px">
 	<div class="inner">
-		<div class="slide" style="background:url('Free1.jpg'); background-size: cover"></div>
-		<div class="slide" style="background:url('Free2.jpg'); background-size: cover"></div>
-		<div class="slide" style="background:url('Free3.jpg'); background-size: cover">
+		<div class="slide" style="background:url('free1.jpg'); background-size: cover"></div>
+		<div class="slide" style="background:url('free2.jpg'); background-size: cover"></div>
+		<div class="slide" style="background:url('free3.jpg'); background-size: cover">
 			<div class="content" style="color:white">Text on an image</div>
 		</div>
 	</div>
@@ -396,47 +399,113 @@ onfocus="document.execCommand('selectAll',false,null);"><div data-autoplay="fals
 	<p class="play">Play</p>
 </div>
 </xmp>
-	<p>The order of the attributes does not matter nor are the attributes case sensitive.</p>
-	<br>
-	<h4 id="four">4. Alternate Controls</h4>
-	<p>Unless you turned it off via <span class="atn">data-swipe</span> you can use your fingers on your mobile phone or tablet to control the carousel-slider. You can use the keyboard to control the carousel-slider as well:</p>
-	<table>
-		<tr>
-			<td colspan="2" style="text-align: center;">&#9000; Keyboard</td>
-		</tr>
-		<tr>
-			<td>&larr; left key</td>
-			<td>Slides to the left</td>
-		</tr>
-		<tr>
-			<td>&rarr; right key</td>
-			<td>Slides to the right</td>
-		</tr>
-		<tr>
-			<td>[ ] space bar</td>
-			<td>Play/Pause</td>
-		</tr>
-		<tr>
-			<td>&#8633; tab key</td>
-			<td>Select carousel sliders</td>
-		</tr>
-		<tr>
-			<td colspan="2" style="text-align: center;">&#9996; Gestures</td>
-		</tr>
-		<tr>
-			<td>&#9756; left swipe</td>
-			<td>Slides to the left</td>
-		</tr>
-		<tr>
-			<td>&#9758; right swipe</td>
-			<td>Slides to the right</td>
-		</tr>
-		<tr>
-			<td>&#9757; tap</td>
-			<td>on an arrow slides respective direction</td>
-		</tr>
-	</table>
-	<p>The respective carousel-slider has to be selected to read keyboard usage.</p>
+		<p>The order of the attributes does not matter nor are the attributes case sensitive.</p>
+		<br>
+		<h4 id="four">4. Alternate Controls</h4>
+		<p>Unless you turned it off via <span class="atn">data-swipe</span> you can use your fingers on your mobile phone or tablet to control the carousel-slider. You can use the keyboard to control the carousel-slider as well:</p>
+		<table>
+			<tr>
+				<td colspan="2" style="text-align: center;">&#9000; Keyboard</td>
+			</tr>
+			<tr>
+				<td>&larr; left key</td>
+				<td>Slides to the left</td>
+			</tr>
+			<tr>
+				<td>&rarr; right key</td>
+				<td>Slides to the right</td>
+			</tr>
+			<tr>
+				<td>[ ] space bar</td>
+				<td>Play/Pause</td>
+			</tr>
+			<tr>
+				<td>&#8633; tab key</td>
+				<td>Select carousel sliders</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">&#9996; Gestures</td>
+			</tr>
+			<tr>
+				<td>&#9756; left swipe</td>
+				<td>Slides to the left</td>
+			</tr>
+			<tr>
+				<td>&#9758; right swipe</td>
+				<td>Slides to the right</td>
+			</tr>
+			<tr>
+				<td>&#9757; tap</td>
+				<td>on an arrow slides respective direction</td>
+			</tr>
+		</table>
+		<p>The respective carousel-slider has to be selected to read keyboard usage.</p>
+		<br>
+		<h4 id="five">5. Events</h4>
+		<p>Carousel-Slider.js triggers events when an interaction takes place which you can use to implement further interactivity to your page.</p>
+		<table>
+			<tr>
+				<td><span class="str">cls-play</span></td>
+				<td>user click/tap on the play button or use spacebar</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-pause</span></td>
+				<td>user clicks/taps on the pause button or use the spacebar</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-clickLeft</span></td>
+				<td>click on the left arrow</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-touchLeft</span></td>
+				<td>touche/tap on the left arrow</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-swiperight</span></td>
+				<td>user swipes to the right</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-keyLeft</span></td>
+				<td>user press the left key</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-left</span></td>
+				<td>the slide moves one slide to the left</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-clickright</span></td>
+				<td>click on the right arrow</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-touchright</span></td>
+				<td>touche/tap on the right arrow</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-swipeLeft</span></td>
+				<td>user swipes to the left</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-keyright</span></td>
+				<td>user press the right key</td>
+			</tr>
+			<tr>
+				<td><span class="str">cls-right</span></td>
+				<td>the slide moves one slide to the right</td>
+			</tr>
+		</table>
+		<p>Each Carousel-Slider.js triggers an event on it's own. You can capture and use these triggers with jQuery within your code. Here is an example:</p>
+<xmp class="prettyprint lang-jquery" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);">$('.carousel-slider').on('cls-pause',function(){
+	// do Stuff when any Carousel-Slider is paused
+})</xmp>
+		<p>The code above captures when any slider is paused. What you might want to do if you have added special things to the slider is to get the slide left or right of one specific slider. That's possible with the use of IDs. Here is an example:</p>
+<xmp class="prettyprint lang-jquery" contenteditable="true" 
+onfocus="document.execCommand('selectAll',false,null);">$('#mySlider').on('cls-right',function(){
+	// do Stuff when mySlider slides one to the right 
+})</xmp>
+		<p>The code above captures when a specific Carousel-Slider with the ID of <span class="str">mySlider</span> is sliding one slide to the right. Now you can do Stuff based on that trigger. Happy hacking.</p>
+		<br>
+		<h4>Have Fun!</h4>
 	</div>
 	<div class="footer">
 		<nav class="navbar">

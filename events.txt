@@ -1,0 +1,27 @@
+cls-clickLeft
+cls-touchLeft
+cls-swipeLeft
+cls-keyLeft
+cls-left
+
+cls-clickRight
+cls-touchRight
+cls-swipeRight
+cls-keyRight
+cls-right
+
+cls-play
+cls-pause
+
+$('#mySlider')	.on('cls-pause',function(){alert('cls-mySlider-pause')})
+				.on('cls-play',function(){alert('cls-mySlider-play')})
+				.on('cls-clickLeft',function(){alert('cls-mySlider-clickLeft')})
+				.on('cls-touchLeft',function(){alert('cls-mySlider-touchLeft')})
+				.on('cls-swipeLeft',function(){alert('cls-mySlider-swipeLeft')})
+				.on('cls-keyLeft',function(){alert('cls-mySlider-keyLeft')})
+				.on('cls-left',function(){alert('cls-mySlider-left')})
+				.on('cls-clickRight',function(){alert('cls-mySlider-clickRight')})
+				.on('cls-touchRight',function(){alert('cls-mySlider-touchRight')})
+				.on('cls-swipeRight',function(){alert('cls-mySlider-swipeRight')})
+				.on('cls-keyRight',function(){alert('cls-mySlider-keyRight')})
+				.on('cls-right',function(){alert('cls-mySlider-right')});

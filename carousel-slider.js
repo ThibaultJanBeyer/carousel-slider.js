@@ -6,8 +6,8 @@ $(function(){
 	/* -------------------------------------------------------------
 	The MIT License (MIT)
 
-		* VERSION: 0.1.0
-		* DATE: 2015-11-21
+		* VERSION: 0.1.1
+		* DATE: 2015-11-24
 	
 	Added v000-010 2015-05-18-2015-06-20:
 	+ A new more comprehensible Website for the slider with better docs – understanding the slider made easy
@@ -56,6 +56,7 @@ $(function(){
 		$clArrows = [],
 		$clArrowLeft = [],
 		$clArrowRight = [],
+		clArrowSize = [],
 		$clPauseAutoPlay = [],
 		$clPlayAutoPlay = [],
 		$clAttrWidth = [],
@@ -136,12 +137,12 @@ $(function(){
 		// We also want to define the slide before the last
 		clSlidesNumBefore[i] = clSlidesNum[i] - 1;//2 in this case
 		//setting the num of total slides
-		clSlidesTotal = clSlidesNum[i]+4;
+		clSlidesTotal[i] = clSlidesNum[i]+4;
 		// And defining the width of all slides together:
-		clInnerWidth[i] = 100*clSlidesTotal;
+		clInnerWidth[i] = 100*clSlidesTotal[i];
 		// Now we set up the starting Positions of the first and the last slide.
 		// Since we will add 2 Before first and 2 after last there is some calculation to be done.
-		clWidth[i] = 100 / clSlidesTotal;
+		clWidth[i] = 100 / clSlidesTotal[i];
 		clFirstPos[i] = 200;
 		clLastPos[i] = (clSlidesNum[i]+1)*100;
 		// Lastly we set the slide where to start (we want to start at slide 1)
@@ -167,18 +168,18 @@ $(function(){
 		// need a better way since screens over 4000px res will appear
 		// could not be tested if nice over 2000px
 		// no idea yet for a better systhem, feel free to send me a request if you have one
-		if ($clSlides[i].width() <= 200) { clMove[i] = 20; clArrowSize = 20;} // if its below 200px we need a bigger %
-		else if ($clSlides[i].width() <= 400) { clMove[i] = 12; clArrowSize = 35;}
-		else if ($clSlides[i].width() >= 1000) { clMove[i] = 4; clArrowSize = 50;}
-		else if ($clSlides[i].width() >= 2000) { clMove[i] = 3; clArrowSize = 55;} // if over 2000px we need less %
-		else if ($clSlides[i].width() >= 3000) { clMove[i] = 2; clArrowSize = 65;}
-		else if ($clSlides[i].width() >= 4000) { clMove[i] = 1; clArrowSize = 65;}
-		else if ($clSlides[i].width() >= 5000) { clMove[i] = 0.5; clArrowSize = 70;}
-		else { clMove[i] = 5; clArrowSize = 45;}
+		if ($clSlides[i].width() <= 200) { clMove[i] = 20; clArrowSize[i] = 20;} // if its below 200px we need a bigger %
+		else if ($clSlides[i].width() <= 400) { clMove[i] = 12; clArrowSize[i] = 35;}
+		else if ($clSlides[i].width() >= 1000) { clMove[i] = 4; clArrowSize[i] = 50;}
+		else if ($clSlides[i].width() >= 2000) { clMove[i] = 3; clArrowSize[i] = 55;} // if over 2000px we need less %
+		else if ($clSlides[i].width() >= 3000) { clMove[i] = 2; clArrowSize[i] = 65;}
+		else if ($clSlides[i].width() >= 4000) { clMove[i] = 1; clArrowSize[i] = 65;}
+		else if ($clSlides[i].width() >= 5000) { clMove[i] = 0.5; clArrowSize[i] = 70;}
+		else { clMove[i] = 5; clArrowSize[i] = 45;}
 		clMoveFull[i] = 100 - clMove[i]; // sets the full movement based on actual rate
 		// Set movement arrows
 		$clArrows[i].css({
-			width: clArrowSize+'px',
+			width: clArrowSize[i]+'px',
 			height: '100%',
 			position: 'absolute',
 			top: '0',
@@ -194,19 +195,19 @@ $(function(){
 		});
 		$clPlayAutoPlay[i].css({
 			position: 'absolute',
-			right: (clArrowSize+10)+'px',
+			right: (clArrowSize[i]+10)+'px',
 			bottom: 0,
 			cursor: 'pointer'
 		});
 		$clPauseAutoPlay[i].css({
 			position: 'absolute',
-			right: (clArrowSize+10)+'px',
+			right: (clArrowSize[i]+10)+'px',
 			bottom: 0,
 			cursor: 'pointer'
 		});
 		// sets the inner padding according to the width
 		$clSlidesContent[i].css({
-			padding: '10px '+(clArrowSize+10)+'px'
+			padding: '10px '+(clArrowSize[i]+10)+'px'
 		})
 		// Since everything is set up, we can start creating 4 copies of the slides
 		// and append/prepend them respectively:
@@ -254,7 +255,6 @@ $(function(){
 										clSliding[i] = false;
 								})
 					},clTime[i]);
-					
 				};
 			};
 
@@ -311,12 +311,14 @@ $(function(){
 								};
 								clSliding[i] = false;
 							});
+					$cl[i]	.trigger('cls-clickLeft')
+							.trigger('cls-left');
 					}
 			})
 				.on({ 'touchstart' : function(){
 					clLeftHover[i] = true;
-					clPause();
 					if (clSliding[i] === false && clLeftHover[i] === true) {
+					clPause();
 					clSliding[i] = true;
 					$clInner[i]
 						.animate({marginLeft: '+='+'100%'},
@@ -333,6 +335,8 @@ $(function(){
 								clLeftHover[i] = false;
 								clSliding[i] = false;
 							});
+					$cl[i]	.trigger('cls-touchLeft')
+							.trigger('cls-left');
 					}
 			} });
 
@@ -385,12 +389,14 @@ $(function(){
 								};
 								clSliding[i] = false;
 							});
+				$cl[i]	.trigger('cls-clickRight')
+						.trigger('cls-right');
 				};
 			})
 				.on({ 'touchstart' : function(){
 					clRightHover[i] = true;
-					clPause();
 					if (clSliding[i] === false && clRightHover[i] === true) {
+					clPause();
 					clSliding[i] = true;
 					$clInner[i]
 						.animate({marginLeft: '-='+'100%'},
@@ -407,8 +413,10 @@ $(function(){
 								clRightHover[i] = false;
 								clSliding[i] = false;
 							});
+					$cl[i]	.trigger('cls-touchRight')
+							.trigger('cls-right');
 					}
-			} });
+			}});
 
 			// Right Swipe
 			// Left Swipe
@@ -429,6 +437,8 @@ $(function(){
 									clSliding[i] = false;
 								});
 						clPlay();
+						$cl[i]	.trigger('cls-swipeRight')
+								.trigger('cls-left');
 					};
 			 	})
 				.on('swipeleft', function(){
@@ -447,6 +457,8 @@ $(function(){
 									clSliding[i] = false;
 								});
 						clPlay();
+						$cl[i]	.trigger('cls-swipeLeft')
+								.trigger('cls-right');
 					};
 		       });
 
@@ -469,6 +481,8 @@ $(function(){
 									clSliding[i] = false;
 								});
 						clPlay();
+						$cl[i]	.trigger('cls-keyRight')
+								.trigger('cls-right');
 					};
      			} else if ( ev.keyCode == 37 ) { /*left*/
 					if (clSliding[i] === false && clSwiping[i] === true) {
@@ -486,17 +500,21 @@ $(function(){
 									clSliding[i] = false;
 								});
 						clPlay();
+						$cl[i]	.trigger('cls-keyLeft')
+								.trigger('cls-left');
 					};
      			} else if ( ev.keyCode == 32 ) { /*space*/
 					if (clAutoPlay[i] == true) {
 						$clPauseAutoPlay[i].hide();
 						$clPlayAutoPlay[i].show();
 						clAutoPlay[i] = false;
+						$cl[i].trigger('cls-pause');
 						clPause();
 					} else if (clAutoPlay[i] == false) {
 						$clPauseAutoPlay[i].show();
 						$clPlayAutoPlay[i].hide();
 						clAutoPlay[i] = true;
+						$cl[i].trigger('cls-play');
 						clPlay();
 					};
 				};
@@ -512,15 +530,17 @@ $(function(){
 				$clPauseAutoPlay[i].hide();
 				$clPlayAutoPlay[i].show();
 				clAutoPlay[i] = false;
+				$cl[i].trigger('cls-pause');
 				clPause();
 			});
 			$clPlayAutoPlay[i].click(function(event) {
 				$clPauseAutoPlay[i].show();
 				$clPlayAutoPlay[i].hide();
 				clAutoPlay[i] = true;
+				$cl[i].trigger('cls-play');
 				clPlay();
 			});
 			// Start the interval
 			clPlay();
 		});
-	});
+});
