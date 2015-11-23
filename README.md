@@ -130,7 +130,6 @@ Unless you turned it off via data-swipe you can use your fingers on your mobile 
 *[ ] space bar* | Play/Pause
   	|  
 **✌ Gestures** 	|  
-  	|  
 *↹ tab key* 	| Select carousel sliders
 *☜ left swipe*	| Slides to the left
 *☞ right swipe* | Slides to the right
