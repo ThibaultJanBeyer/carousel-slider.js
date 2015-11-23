@@ -108,6 +108,89 @@ Choose what happens if there is an overflow within a slide. Any valid CSS value.
 *data-​swipe="…"* – 
 Is swiping through with your fingers allowed (phone/tablet gesture). Default is true. Example: data-time="false"
 
+Here is an example how the HTML would look like using all custom attributes:
+
+```html
+<div data-autoplay="false" class="carousel-slider" data-width="100%" data-height="150px" data-speed="2000" data-time="3000" data-overflow="scroll" data-swipe="true">
+	<div class="inner">
+		<div class="slide" style="background:lightblue">
+			<div class="content">
+				<p>Page 1</p>
+			</div>
+		</div>
+		<div class="slide" style="background:lightgreen">
+			<div class="content">
+				<p>Page 2</p>
+			</div>
+		</div>
+	</div>
+	<div class="arrow left"> < </div>
+	<div class="arrow right"> > </div>
+	<p class="pause">Pause</p>
+	<p class="play">Play</p>
+</div>
+```
+
+Alternate Controls
+---------------------
+
+Unless you turned it off via data-swipe you can use your fingers on your mobile phone or tablet to control the carousel-slider. You can use the keyboard to control the carousel-slider as well:
+
+*← left key* – Slides to the left
+
+*→ right key* – Slides to the right
+
+*[ ] space bar* – Play/Pause
+
+*↹ tab key* – Select carousel sliders
+
+*☜ left swipe* – Slides to the left
+
+*☞ right swipe* – Slides to the right
+
+*☝ tap* – on an arrow slides respective direction
+
+The respective carousel-slider has to be selected to read keyboard usage.
+
+Events
+---------------------
+
+Carousel-Slider.js triggers events when an interaction takes place which you can use to implement further interactivity to your page.
+
+Events  		| When
+------------- 	| -------------
+*cls-play*		| user click/tap on the play button or use spacebar
+*cls-pause*		| user clicks/taps on the pause button or use the spacebar
+*cls-clickLeft* | click on the left arrow
+*cls-touchLeft* | touche/tap on the left arrow
+*cls-swiperight*| user swipes to the right
+*cls-keyLeft* 	| user press the left key
+*cls-left* 		| the slide moves one slide to the left
+*cls-clickright*| click on the right arrow
+*cls-touchright*| touche/tap on the right arrow
+*cls-swipeLeft* | user swipes to the left
+*cls-keyright* 	| user press the right key
+*cls-right*   	| the slide moves one slide to the right
+
+Each Carousel-Slider.js triggers an event on it's own. You can capture and use these triggers with jQuery within your code. Here is an example:
+
+```JSX
+$('.carousel-slider').on('cls-pause',function(){
+	// do Stuff when any Carousel-Slider is paused
+})
+```
+
+The code above captures when any slider is paused. What you might want to do if you have added special things to the slider is to get the slide left or right of one specific slider. That's possible with the use of IDs. Here is an example:
+
+```JSX
+$('#mySlider').on('cls-right',function(){
+	// do Stuff when mySlider slides one to the right 
+})
+```
+
+The code above captures when a specific Carousel-Slider with the ID of mySlider is sliding one slide to the right. Happy hacking.
+
+
 ------------------
 Check out http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/ if you need more examples.
 
