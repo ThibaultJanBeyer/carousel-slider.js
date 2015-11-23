@@ -157,7 +157,7 @@ Events
 
 Carousel-Slider.js triggers events when an interaction takes place which you can use to implement further interactivity to your page.
 
-Events  		| When
+
 ------------- 	| -------------
 *cls-play*		| user click/tap on the play button or use spacebar
 *cls-pause*		| user clicks/taps on the pause button or use the spacebar
