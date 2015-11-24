@@ -1,9 +1,4 @@
-$(function(){
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/* Extra Swipe Plugin: jquery.detectSwipe v2.1.1 * jQuery Plugin to obtain touch gestures from iPhone, iPod Touch, iPad and Android * http://github.com/marcandre/detect_swipe * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)  */
-	function onTouchEnd(){this.removeEventListener("touchmove",onTouchMove),this.removeEventListener("touchend",onTouchEnd),isMoving=!1}function onTouchMove(t){if($.detectSwipe.preventDefault&&t.preventDefault(),isMoving){var e,n=t.touches[0].pageX,o=t.touches[0].pageY,s=startX-n,i=startY-o;Math.abs(s)>=$.detectSwipe.threshold?e=s>0?"left":"right":Math.abs(i)>=$.detectSwipe.threshold&&(e=i>0?"down":"up"),e&&(onTouchEnd.call(this),$(this).trigger("swipe",e).trigger("swipe"+e))}}function onTouchStart(t){1==t.touches.length&&(startX=t.touches[0].pageX,startY=t.touches[0].pageY,isMoving=!0,this.addEventListener("touchmove",onTouchMove,!1),this.addEventListener("touchend",onTouchEnd,!1))}function setup(){this.addEventListener&&this.addEventListener("touchstart",onTouchStart,!1)}function teardown(){this.removeEventListener("touchstart",onTouchStart)}$.detectSwipe={version:"2.1.1",enabled:"ontouchstart"in document.documentElement,preventDefault:!0,threshold:20};var startX,startY,isMoving=!1,startTime,elapsedTime;$.event.special.swipe={setup:setup},$.each(["left","up","down","right"],function(){$.event.special["swipe"+this]={setup:function(){$(this).on("swipe",$.noop)}}});
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/* -------------------------------------------------------------
+/* -------------------------------------------------------------
 	The MIT License (MIT)
 
 		* VERSION: 0.1.1
@@ -24,6 +19,10 @@ $(function(){
 	* Website: http://www.thibaultjanbeyer.com/
 	* Example: http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/
 	* Github: https://github.com/ThibaultJanBeyer/carousel-slider.js/
+	
+	Extra Swipe Plugin: jquery.detectSwipe v2.1.1 
+	http://github.com/marcandre/detect_swipe
+	by Marc-André Lafortune under the same MIT License
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -42,12 +41,20 @@ $(function(){
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
+	
 	------------------------------------------------------------- */
 	/*
 	-------------------------------------------------------------
 	Only change the following code if you know what you're doing.
 	-------------------------------------------------------------
 	*/
+
+$(function(){
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/* Extra Swipe Plugin: jquery.detectSwipe v2.1.1 * jQuery Plugin to obtain touch gestures from iPhone, iPod Touch, iPad and Android * http://github.com/marcandre/detect_swipe * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)  */
+	function onTouchEnd(){this.removeEventListener("touchmove",onTouchMove),this.removeEventListener("touchend",onTouchEnd),isMoving=!1}function onTouchMove(t){if($.detectSwipe.preventDefault&&t.preventDefault(),isMoving){var e,n=t.touches[0].pageX,o=t.touches[0].pageY,s=startX-n,i=startY-o;Math.abs(s)>=$.detectSwipe.threshold?e=s>0?"left":"right":Math.abs(i)>=$.detectSwipe.threshold&&(e=i>0?"down":"up"),e&&(onTouchEnd.call(this),$(this).trigger("swipe",e).trigger("swipe"+e))}}function onTouchStart(t){1==t.touches.length&&(startX=t.touches[0].pageX,startY=t.touches[0].pageY,isMoving=!0,this.addEventListener("touchmove",onTouchMove,!1),this.addEventListener("touchend",onTouchEnd,!1))}function setup(){this.addEventListener&&this.addEventListener("touchstart",onTouchStart,!1)}function teardown(){this.removeEventListener("touchstart",onTouchStart)}$.detectSwipe={version:"2.1.1",enabled:"ontouchstart"in document.documentElement,preventDefault:!0,threshold:20};var startX,startY,isMoving=!1,startTime,elapsedTime;$.event.special.swipe={setup:setup},$.each(["left","up","down","right"],function(){$.event.special["swipe"+this]={setup:function(){$(this).on("swipe",$.noop)}}});
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	// Setup
 	var $cl = [],
 		$clInner = [],
