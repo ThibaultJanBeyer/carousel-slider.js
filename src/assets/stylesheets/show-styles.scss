@@ -216,11 +216,19 @@ td {
 }
 
 .prettyprint {
-  overflow: auto;
   width: 95%;
   padding: 10px;
-  font-family: 'Fira Mono', sans-serif;
-  font-size: 0.8em;
+  font-family: "Consolas", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Courier New", monotype;
+  font-size: 12px;
+  display: block;
+  tab-size: 2;
+  background: #fafafa;
+  white-space: pre;
+  overflow: auto;
+}
+
+pre {
+  margin: 0;
 }
 
 .footer {
@@ -232,3 +240,4 @@ td {
   background-color: #C44B48;
   box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
 }
+
