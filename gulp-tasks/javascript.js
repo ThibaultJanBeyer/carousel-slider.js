@@ -9,7 +9,8 @@ $.size = require('gulp-size');
 $.browserSync = require('browser-sync').create();
 
 var jsSrc = './src/carousel-slider.js',
-    jsDst = './dist/';
+    jsDst1 = './dist/',
+    jsDst2 = './show/';
 
 module.exports = function () {
   return gulp.src(jsSrc)
@@ -25,6 +26,7 @@ module.exports = function () {
     .pipe($.concat('cls.min.js'))
     .pipe($.uglify())
     .pipe($.size({title: 'JS'}))
-    .pipe(gulp.dest(jsDst))
+    .pipe(gulp.dest(jsDst1))
+    .pipe(gulp.dest(jsDst2))
     .pipe($.browserSync.stream());
 };

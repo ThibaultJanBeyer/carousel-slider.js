@@ -4,13 +4,13 @@ var plugins = require('gulp-load-plugins')();
 plugins.browserSync = require('browser-sync').create();
 
 // Individual tasks
+gulp.task('html', require('./gulp-tasks/html'));
 gulp.task('img', require('./gulp-tasks/img'));
 gulp.task('javascript', require('./gulp-tasks/javascript'));
 gulp.task('clean', require('./gulp-tasks/clean'));
 gulp.task('sass', require('./gulp-tasks/sass'));
 gulp.task('movings', require('./gulp-tasks/movings'));
 gulp.task('watch', require('./gulp-tasks/watch'));
-gulp.task('html', require('./gulp-tasks/html'));
 
 // Globs
 gulp.task('cln', ['clean']);
