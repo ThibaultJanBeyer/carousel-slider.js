@@ -1,0 +1,234 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,700,300);
+@import url(https://fonts.googleapis.com/css?family=Grand+Hotel);
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono);
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-weight: 400;
+  color: #333;
+  background-color: #FFF;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+  font-feature-settings: "liga", "kern";
+  font-family: 'Fira Sans', sans-serif;
+}
+
+h2 {
+  font-family: 'Grand Hotel', cursive;
+}
+
+.navbar {
+  padding-top: 20px;
+}
+
+.navbar .navbar-links .navbar-link {
+  padding: 0px 15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar .navbar-links .navbar-link:last-child {
+  border-right: medium none;
+}
+
+@media screen and (max-width: 400px) {
+  .navbar .navbar-links .navbar-link:nth-child(2) {
+    border-right: medium none;
+  }
+
+  .navbar .navbar-links .navbar-link:last-child {
+    display: block;
+  }
+
+  .main-header-content {
+    position: relative !important;
+    transform:none !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin-top: 50px;
+  }
+}
+
+.main-header {
+  height: 85%;
+  width: 100%;
+  min-height: 450px;
+  color: #FFF;
+  text-align: center;
+  background-color: #C44B48;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+a {
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+td a, ul a {
+  color: lightskyblue;
+
+  &:hover {
+    color:blue;
+  }
+} 
+
+.main-header-content {
+  position: absolute;
+  transform-style: preserve-3d;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#logo{
+  width: 150px;
+}
+
+#logo path {
+  fill: white;
+}
+
+.main-header-btn {
+  padding: 10px;
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: bold;
+  margin: 35px;
+  transition: all 0.1s linear;
+  transform: translateZ(0);
+  background: linear-gradient(to bottom, #17b6fe, #03A9F4);
+  box-shadow: 0px 0px 1px #1199d7, 0px 1px 1px #0c6f9c, 0px 1px 1px #1199d7, 0px 2px 1px #0c6f9c, 0px 2px 1px #1199d7, 0px 3px 1px #0c6f9c, 0px 3px 1px #1199d7, 0px 4px 1px #0c6f9c, 0px 4px 1px #1199d7, 0px 5px 1px #0c6f9c, 0px 5px 1px #1199d7, 0px 7px 0 rgba(0, 0, 0, 0.05), 0px 8px 0 rgba(0, 0, 0, 0.05), 0px 9px 0 rgba(0, 0, 0, 0.04), 0px 10px 0 rgba(0, 0, 0, 0.04), 0px 11px 0 rgba(0, 0, 0, 0.03), 0px 12px 0 rgba(0, 0, 0, 0.03), 0px 13px 0 rgba(0, 0, 0, 0.02), 0px 14px 0 rgba(0, 0, 0, 0.02), 0px 15px 0 rgba(0, 0, 0, 0.01), 0px 16px 0 rgba(0, 0, 0, 0.01), 0px 17px 0 rgba(0, 0, 0, 0.01), 0px 18px 0 rgba(0, 0, 0, 0.01), inset 0 4px 5px -2px rgba(255, 255, 255, 0.5), inset 0 1px 0 0 rgba(0, 0, 0, 0.3);
+
+  &:active {
+    box-shadow: inset 1px 2px 3px rgba(0,0,0,0.2); transform: translate3d(0px, 6px, 0);
+  }
+}
+
+.dl {
+  width: 1.35em;
+  height: 1em;
+  vertical-align: top;
+  padding-left: 0.3em;
+}
+
+.dl path {
+  fill: white;
+}
+
+.main-info {
+  max-width: 1024px;
+  margin: 0 auto;
+  min-height: 400px;
+}
+
+.benefits {
+  padding: 0 50px 25px 50px;
+}
+
+.benefit {
+  float: left;
+  width: 47.5%;
+  margin-top: 40px;
+  margin-right: 2%;
+  height: 120px;
+}
+
+.benefits .benefit:nth-child(2n) {
+  margin-right: 0%;
+  float: right;
+}
+
+.benefit-text {
+  color: #7F8C8D;
+}
+
+@media screen and (max-width: 600px) {
+  .benefit {
+    float: none;
+    width: 100%;
+    height: inherit;
+    margin: 0;
+    padding: 20px 0;
+  }
+}
+
+.documentation {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.documentation h3 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0;
+  margin-top:15px;
+}
+
+.documentation h4 {
+  font-size: 1.5em;
+  margin-top: 1em;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+  padding-top: 1em;
+}
+
+.typewriter {
+  text-align: center;
+}
+
+#typewriter {
+  width: 67%;
+}
+
+.doc-navigation {
+  position: absolute;
+  left: 0;
+  width: 135px;
+  background: white;
+  font-size: 0.8em;
+  padding:10px 10px 10px 0;
+}
+
+.doc-navigation ul {
+  list-style-type: none;
+  padding:0;
+  margin:0;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  border-top: 1px solid rgba(0,0,0,0.2);
+  vertical-align: top;
+  padding:2% 1%;
+}
+
+.prettyprint {
+  overflow: auto;
+  width: 95%;
+  padding: 10px;
+  font-family: 'Fira Mono', sans-serif;
+  font-size: 0.8em;
+}
+
+.footer {
+  height: 80px;
+  margin-top:50px;
+  width: 100%;
+  color: #FFF;
+  text-align: center;
+  background-color: #C44B48;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+}

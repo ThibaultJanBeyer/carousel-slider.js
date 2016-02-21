@@ -1,19 +1,20 @@
 /* -------------------------------------------------------------
 	The MIT License (MIT)
 
-		* VERSION: 0.1.1
-		* DATE: 2015-11-24
+		* VERSION: 0.1.2
+		* DATE: 2016-02-19
 	
-	Added v000-010 2015-05-18-2015-06-20:
-	+ A new more comprehensible Website for the slider with better docs – understanding the slider made easy
-	+ Better function – now everything is based on the size values set in html via data-width and data-height which resolves bugs on the one side and allows user to have different units for every slider and even change values an units afterhand which makes the slider much more flexible
-	+ Key Funktions within slider
-	+ Slider within Slider
-	+ w3c friendly
-	+ You can now have multiple totally different sliders on one page (todo: slider inside of slider)
-	+ Sizes are set directly in html
-	+ Swipe Gestures (now built in with modified jquery.detectSwipe v2.1.1)
-	+ Cleaner Animation
+  Added v012 2016-02-19:  + Made slides accessible (for tab navigation) !!
+                          + Removed Keyblocker (kept only for used keys)
+  Added from v000 to      + A new more comprehensible Website for the slider with better docs – understanding the slider made easy 
+  v011 2015-05-18 to      + Better function: everything is based on size values set in html via data-width and data-height which resolves bugs on the one side and allows user to have different units for every slider and even change values an units afterhand which makes the slider much more flexible 
+  2015-06-20:             + Key Funktions within slider
+                          + Slider within Slider
+	                       	+ w3c friendly
+	                        + You can now have multiple totally different sliders on one page (todo: slider inside of slider)
+	                        + Sizes are set directly in html
+	                        + Swipe Gestures (now built in with modified jquery.detectSwipe v2.1.1)
+	                        + Cleaner Animation
 	
 	* Copyright (c) 2015, Thibault Jan Beyer
 	* Website: http://www.thibaultjanbeyer.com/
@@ -51,8 +52,105 @@
 
 $(function(){
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/* Extra Swipe Plugin: jquery.detectSwipe v2.1.1 * jQuery Plugin to obtain touch gestures from iPhone, iPod Touch, iPad and Android * http://github.com/marcandre/detect_swipe * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)  */
-	function onTouchEnd(){this.removeEventListener("touchmove",onTouchMove),this.removeEventListener("touchend",onTouchEnd),isMoving=!1}function onTouchMove(t){if($.detectSwipe.preventDefault&&t.preventDefault(),isMoving){var e,n=t.touches[0].pageX,o=t.touches[0].pageY,s=startX-n,i=startY-o;Math.abs(s)>=$.detectSwipe.threshold?e=s>0?"left":"right":Math.abs(i)>=$.detectSwipe.threshold&&(e=i>0?"down":"up"),e&&(onTouchEnd.call(this),$(this).trigger("swipe",e).trigger("swipe"+e))}}function onTouchStart(t){1==t.touches.length&&(startX=t.touches[0].pageX,startY=t.touches[0].pageY,isMoving=!0,this.addEventListener("touchmove",onTouchMove,!1),this.addEventListener("touchend",onTouchEnd,!1))}function setup(){this.addEventListener&&this.addEventListener("touchstart",onTouchStart,!1)}function teardown(){this.removeEventListener("touchstart",onTouchStart)}$.detectSwipe={version:"2.1.1",enabled:"ontouchstart"in document.documentElement,preventDefault:!0,threshold:20};var startX,startY,isMoving=!1,startTime,elapsedTime;$.event.special.swipe={setup:setup},$.each(["left","up","down","right"],function(){$.event.special["swipe"+this]={setup:function(){$(this).on("swipe",$.noop)}}});
+	// Extra Swipe Plugin: jquery.detectSwipe v2.1.1 * jQuery Plugin to obtain touch gestures from iPhone, iPod Touch, iPad and Android * http://github.com/marcandre/detect_swipe * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)
+	$.detectSwipe = {
+    version: '2.1.1',
+    enabled: 'ontouchstart' in document.documentElement,
+    preventDefault: true,
+    threshold: 20
+  };
+
+  var startX,
+    startY,
+    isMoving = false;
+
+  function onTouchEnd() {
+    this.removeEventListener('touchmove', onTouchMove);
+    this.removeEventListener('touchend', onTouchEnd);
+    isMoving = false;
+  }
+
+  function onTouchMove(e) {
+    if ($.detectSwipe.preventDefault) { e.preventDefault(); }
+    if(isMoving) {
+      var x = e.touches[0].pageX;
+      var y = e.touches[0].pageY;
+      var dx = startX - x;
+      var dy = startY - y;
+      var dir;
+      if(Math.abs(dx) >= $.detectSwipe.threshold) {
+        dir = dx > 0 ? 'left' : 'right';
+      }
+      else if(Math.abs(dy) >= $.detectSwipe.threshold) {
+        dir = dy > 0 ? 'down' : 'up';
+      }
+      if(dir) {
+        onTouchEnd.call(this);
+        $(this).trigger('swipe', dir).trigger('swipe' + dir);
+      }
+    }
+  }
+
+  function onTouchStart(e) {
+    if (e.touches.length == 1) {
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+      isMoving = true;
+      this.addEventListener('touchmove', onTouchMove, false);
+      this.addEventListener('touchend', onTouchEnd, false);
+    }
+  }
+
+  function setup() {
+    this.addEventListener && this.addEventListener('touchstart', onTouchStart, false); // jshint ignore:line
+  }
+
+  function teardown() {
+    this.removeEventListener('touchstart', onTouchStart);
+  }
+
+  $.event.special.swipe = { setup: setup };
+
+  $.each(['left', 'up', 'down', 'right'], function () {
+    $.event.special['swipe' + this] = { setup: function(){
+      $(this).on('swipe', $.noop);
+    } };
+  });
+  
+  // Extra Plugin to get all Elements that are focusable by Lee found here http://stackoverflow.com/questions/7668525/is-there-a-jquery-selector-to-get-all-elements-that-can-get-focus/#7668761
+  function focusable( element ) {
+    var map, mapName, img,
+        nodeName = element.nodeName.toLowerCase(),
+        isTabIndexNotNaN = !isNaN( $.attr( element, "tabindex" ) );
+    if ( "area" === nodeName ) {
+        map = element.parentNode;
+        mapName = map.name;
+        if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+            return false;
+        }
+        img = $( "img[usemap=#" + mapName + "]" )[0];
+        return !!img && visible( img );
+    }
+    return ( /input|select|textarea|button|object/.test( nodeName ) ?
+        !element.disabled :
+        "a" === nodeName ?
+            element.href || isTabIndexNotNaN :
+            isTabIndexNotNaN) &&
+        // the element and all of its ancestors must be visible
+        visible( element );
+
+    function visible( element ) {
+      return $.expr.filters.visible( element ) &&
+        !$( element ).parents().addBack().filter(function() {
+          return $.css( this, "visibility" ) === "hidden";
+        }).length;
+    }
+  }
+  $.extend($.expr[':'], {
+    focusable: function( element ) {
+		  return focusable( element );
+	  }
+  });
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Setup
@@ -88,9 +186,20 @@ $(function(){
 		clLeftHover = [],
 		clLeftHoverLeave = [],
 		clRightHover = [],
-		clRightHoverLeave = [];
+		clRightHoverLeave = [],
+    makeAccessible = [];
 
 	$('.carousel-slider').each(function(i, el) {
+
+    // Function for accessibility within the slides
+    makeAccessible[i] = function() {
+      var $clSlide = $($clSlides[i][clSlidePos[i] + 1]); // Finds the Slide that is in view
+      var globallyFocusable = $clSlides[i].find(':focusable'); // Get all focusable elements from each Carousel Slide
+      var locallyFocusable = $clSlide.find(':focusable'); // Get all focusable elements from the Slide that is in view
+      $(globallyFocusable).attr( 'tabIndex', '-1' ); // Set all focusable elements to be non-focusable
+      $(locallyFocusable).attr( 'tabIndex', '0' ); // Set all focusable elements from the Slide that is in view to be focusable
+    };
+
 		// Find your stuff
 		$cl[i] = $(this);
 		$clInner[i] = $cl[i].children('.inner');
@@ -101,35 +210,38 @@ $(function(){
 		$clArrowRight[i] = $cl[i].children('.arrow.right');
 		$clPlayAutoPlay[i] = $cl[i].children('.play');
 		$clPauseAutoPlay[i] = $cl[i].children('.pause');
+
 		// Now we set up the starting CSS relative to the chosen Options
 		$clAttrWidth[i] = $cl[i].attr('data-width');
 		$clAttrHeight[i] = $cl[i].attr('data-height');
+
 		//checking the custom user options in the attributes
 		if ($cl[i].attr('data-autoplay')) {
 			clAutoPlay[i] = JSON.parse($cl[i].attr('data-autoplay'));
 		} else {
 			clAutoPlay[i] = true;
-		};
+		}
 		if ($cl[i].attr('data-speed')) {
 			clSpeed[i] = parseInt($cl[i].attr('data-speed'));
 		} else {
 			clSpeed[i] = 1000;
-		};
+		}
 		if ($cl[i].attr('data-time')) {
 			clTime[i] = parseInt($cl[i].attr('data-time'));
 		} else {
 			clTime[i] = 7000;
-		};
+		}
 		if ($cl[i].attr('data-overflow')) {
 			clOverflow[i] = $cl[i].attr('data-overflow');
 		} else {
 			clOverflow[i] = 'auto';
-		};
+		}
 		if ($cl[i].attr('data-swipe')) {
 			clSwiping[i] = JSON.parse($cl[i].attr('data-swipe'));
 		} else {
 			clSwiping[i] = true;
-		};
+		}
+
 		// Styling the clSlider
 		$cl[i].css({
 			width: $clAttrWidth[i],
@@ -137,7 +249,8 @@ $(function(){
 			position: 'relative',
 			overflow: 'hidden',
 		});
-		$cl[i].attr("tabindex","0");
+		$cl[i].attr("tabindex","0"); // making it accessible
+
 		// We begin by checking how many slides there are
 		clSlidesNum[i] = $clSlides[i].length;//3
 		// Note that the slider will only work if there are more than one slides inside.
@@ -169,8 +282,9 @@ $(function(){
 			overflowY: clOverflow[i],
 			float: 'left',
 		});
+
 		// Move Options
-		// cheap option to make a % value responsive based on the actual slide size in px since % is broken:
+		// cheap script to make a % value responsive based on the actual slide size in px since % is broken:
 		// 5% is not enough below 400px and too much over 1000px
 		// need a better way since screens over 4000px res will appear
 		// could not be tested if nice over 2000px
@@ -215,7 +329,8 @@ $(function(){
 		// sets the inner padding according to the width
 		$clSlidesContent[i].css({
 			padding: '10px '+(clArrowSize[i]+10)+'px'
-		})
+		});
+
 		// Since everything is set up, we can start creating 4 copies of the slides
 		// and append/prepend them respectively:
 		var $temp;
@@ -234,6 +349,7 @@ $(function(){
 					$temp.clone().prependTo($clInner[i]);
 				}
 			});
+      $clSlides[i] = $clInner[i].children('.slide'); // add the new slides to the slides variable
 
 			// INTERVAL Startup //
 			clSliding[i] = false;
@@ -252,22 +368,25 @@ $(function(){
 									clSpeed[i],
 									function(){
 										clSlidePos[i]++;
+                    makeAccessible[i]();
 										if (clSlidePos[i] < 1) {
 											clSlidePos[i] = clSlidesNum[i];
+                      makeAccessible[i]();
 											$clInner[i].css({marginLeft: "-"+clLastPos[i]+'%'});
 										} else if (clSlidePos[i] > clSlidesNum[i]) {
 											clSlidePos[i] = 1;
+                      makeAccessible[i]();
 											$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'%'});
-										};
+										}
 										clSliding[i] = false;
-								})
+								});
 					},clTime[i]);
-				};
-			};
+				}
+			}
 
 			function clPause(){
 				clearInterval(interval[i]);
-			};
+			}
 
 			// LEFT Startup //
 			clLeftHover[i] = false;
@@ -304,10 +423,12 @@ $(function(){
 							clSpeed[i],
 							function(){
 								clSlidePos[i]--;
+                makeAccessible[i]();
 								if (clSlidePos[i] < 1) {
 									clSlidePos[i] = clSlidesNum[i];
+                  makeAccessible[i]();
 									$clInner[i].css({marginLeft: "-"+(clLastPos[i]-clMove[i])+'%'});
-								};
+								}
 								if (clLeftHoverLeave[i]) {
 									clPlay();
 									$clInner[i]
@@ -315,7 +436,7 @@ $(function(){
 										clSpeed[i]/4);
 									clLeftHoverLeave[i] = false;
 									clLeftHover[i] = false;
-								};
+								}
 								clSliding[i] = false;
 							});
 					$cl[i]	.trigger('cls-clickLeft')
@@ -332,12 +453,13 @@ $(function(){
 							clSpeed[i],
 							function(){
 								clSlidePos[i]--;
+                makeAccessible[i]();
 								if (clSlidePos[i] < 1) {
 									clSlidePos[i] = clSlidesNum[i];
+                  makeAccessible[i]();
 									$clInner[i].css({marginLeft: "-"+clLastPos[i]+'%'});
-								};
+								}
 								clPlay();
-								$clInner[i]
 								clLeftHoverLeave[i] = false;
 								clLeftHover[i] = false;
 								clSliding[i] = false;
@@ -360,7 +482,7 @@ $(function(){
 							.stop(true, true)
 							.animate({marginLeft: '-='+clMove[i]+'%'},
 							clSpeed[i]/4);
-					};
+					}
 			})
 				.on('mouseleave', function() {
 					clRightHoverLeave[i] = true;
@@ -372,7 +494,7 @@ $(function(){
 							clSpeed[i]/4);
 						clRightHover[i] = false;
 						clRightHoverLeave[i] = false;
-					};
+					}
 			})
 				.on('click', function() {
 				if (clSliding[i] === false && clRightHover[i] === true) {
@@ -382,10 +504,12 @@ $(function(){
 							clSpeed[i],
 							function(){
 								clSlidePos[i]++;
+                makeAccessible[i]();
 								if (clSlidePos[i] > clSlidesNum[i]) {
 									clSlidePos[i] = 1;
+                  makeAccessible[i]();
 									$clInner[i].css({marginLeft: "-"+(clFirstPos[i]+clMove[i])+'%'});
-								};
+								}
 								if (clRightHoverLeave[i]) {
 									clPlay();
 									$clInner[i]
@@ -393,12 +517,12 @@ $(function(){
 										clSpeed[i]/4);
 									clRightHoverLeave[i] = false;
 									clRightHover[i] = false;
-								};
+								}
 								clSliding[i] = false;
 							});
 				$cl[i]	.trigger('cls-clickRight')
 						.trigger('cls-right');
-				};
+				}
 			})
 				.on({ 'touchstart' : function(){
 					clRightHover[i] = true;
@@ -410,12 +534,13 @@ $(function(){
 							clSpeed[i],
 							function(){
 								clSlidePos[i]++;
+                makeAccessible[i]();
 								if (clSlidePos[i] > clSlidesNum[i]) {
 									clSlidePos[i] = 1;
+                  makeAccessible[i]();
 									$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'%'});
-								};
+								}
 								clPlay();
-								$clInner[i]
 								clRightHoverLeave[i] = false;
 								clRightHover[i] = false;
 								clSliding[i] = false;
@@ -437,16 +562,18 @@ $(function(){
 								clSpeed[i],
 								function(){
 									clSlidePos[i]--;
+                  makeAccessible[i]();
 									if (clSlidePos[i] < 1) {
 										clSlidePos[i] = clSlidesNum[i];
+                    makeAccessible[i]();
 										$clInner[i].css({marginLeft: "-"+clLastPos[i]+'%'});
-									};
+									}
 									clSliding[i] = false;
 								});
 						clPlay();
 						$cl[i]	.trigger('cls-swipeRight')
 								.trigger('cls-left');
-					};
+					}
 			 	})
 				.on('swipeleft', function(){
 					if (clSliding[i] === false && clSwiping[i] === true) {
@@ -457,22 +584,24 @@ $(function(){
 								clSpeed[i],
 								function(){
 									clSlidePos[i]++;
+                  makeAccessible[i]();
 									if (clSlidePos[i] > clSlidesNum[i]) {
 										clSlidePos[i] = 1;
+                    makeAccessible[i]();
 										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'%'});
-									};
+									}
 									clSliding[i] = false;
 								});
 						clPlay();
 						$cl[i]	.trigger('cls-swipeLeft')
 								.trigger('cls-right');
-					};
+					}
 		       });
 
 			// Keypress within slider
 			$cl[i].keydown(function(ev) { 
-				ev.preventDefault();
   				if ( ev.keyCode == 39 ) { /*right*/
+          ev.preventDefault();
   					if (clSliding[i] === false && clSwiping[i] === true) {
   						clSliding[i] = true;
 						clPause();
@@ -481,17 +610,20 @@ $(function(){
 								clSpeed[i],
 								function(){
 									clSlidePos[i]++;
+                  makeAccessible[i]();
 									if (clSlidePos[i] > clSlidesNum[i]) {
 										clSlidePos[i] = 1;
+                    makeAccessible[i]();
 										$clInner[i].css({marginLeft: "-"+clFirstPos[i]+'%'});
-									};
+									}
 									clSliding[i] = false;
 								});
 						clPlay();
 						$cl[i]	.trigger('cls-keyRight')
 								.trigger('cls-right');
-					};
+					}
      			} else if ( ev.keyCode == 37 ) { /*left*/
+           ev.preventDefault();
 					if (clSliding[i] === false && clSwiping[i] === true) {
 						clSliding[i] = true;
 						clPause();
@@ -500,31 +632,34 @@ $(function(){
 								clSpeed[i],
 								function(){
 									clSlidePos[i]--;
+                  makeAccessible[i]();
 									if (clSlidePos[i] < 1) {
 										clSlidePos[i] = clSlidesNum[i];
+                    makeAccessible[i]();
 										$clInner[i].css({marginLeft: "-"+clLastPos[i]+'%'});
-									};
+									}
 									clSliding[i] = false;
 								});
 						clPlay();
 						$cl[i]	.trigger('cls-keyLeft')
 								.trigger('cls-left');
-					};
+					}
      			} else if ( ev.keyCode == 32 ) { /*space*/
-					if (clAutoPlay[i] == true) {
+           ev.preventDefault();
+					if (clAutoPlay[i] === true) {
 						$clPauseAutoPlay[i].hide();
 						$clPlayAutoPlay[i].show();
 						clAutoPlay[i] = false;
 						$cl[i].trigger('cls-pause');
 						clPause();
-					} else if (clAutoPlay[i] == false) {
+					} else if (clAutoPlay[i] === false) {
 						$clPauseAutoPlay[i].show();
 						$clPlayAutoPlay[i].hide();
 						clAutoPlay[i] = true;
 						$cl[i].trigger('cls-play');
 						clPlay();
-					};
-				};
+					}
+				}
   			});
 			
 			// At the end -> Stop Autoplay:
@@ -536,17 +671,23 @@ $(function(){
 			$clPauseAutoPlay[i].click(function(event) {
 				$clPauseAutoPlay[i].hide();
 				$clPlayAutoPlay[i].show();
+        $clPlayAutoPlay[i].focus();
 				clAutoPlay[i] = false;
 				$cl[i].trigger('cls-pause');
 				clPause();
 			});
 			$clPlayAutoPlay[i].click(function(event) {
 				$clPauseAutoPlay[i].show();
+        $clPauseAutoPlay[i].focus();
 				$clPlayAutoPlay[i].hide();
 				clAutoPlay[i] = true;
 				$cl[i].trigger('cls-play');
 				clPlay();
 			});
+
+      // make this beauty accessible
+      makeAccessible[i]();
+
 			// Start the interval
 			clPlay();
 		});
