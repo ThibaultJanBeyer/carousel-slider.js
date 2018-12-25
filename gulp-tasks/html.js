@@ -7,7 +7,7 @@ $.size = require('gulp-size');
 $.browserSync = require('browser-sync').create();
 
 var htmlSrc = './src/*.html',
-    htmlDst = './show';
+  htmlDst = './docs';
 
 module.exports = function () {
   return gulp.src(htmlSrc)
@@ -18,8 +18,12 @@ module.exports = function () {
       }
     }))
     .pipe($.htmlhint())
-    .pipe($.htmlmin({collapseWhitespace: true}))
-    .pipe($.size({title: 'HTML'}))
+    .pipe($.htmlmin({
+      collapseWhitespace: true
+    }))
+    .pipe($.size({
+      title: 'HTML'
+    }))
     .pipe(gulp.dest(htmlDst))
     .pipe($.browserSync.stream());
 };

@@ -5,6 +5,9 @@
   "description": "a lightweight, responsive, accessible, customizable and awesome carousel slider",
   "author": "Thibault Jan Beyer",
   "license": "MIT",
+  "scripts": {
+    "start": "gulp"
+  },
   "dependencies": {
     "gulp": "*"
   },

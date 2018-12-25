@@ -10,7 +10,7 @@ $.size = require('gulp-size');
 $.browserSync = require('browser-sync').create();
 
 var scssSrc = './src/assets/stylesheets/bundle.scss',
-    scssDst = './show/';
+  scssDst = './docs/';
 
 module.exports = function () {
   return gulp.src(scssSrc)
@@ -23,9 +23,11 @@ module.exports = function () {
     .pipe($.scsslint())
     .pipe($.sass())
     .pipe($.autoprefixer())
-//    .pipe($.concat('bundle.css'))
+    //    .pipe($.concat('bundle.css'))
     .pipe($.csso())
-    .pipe($.size({title: 'SASS'}))
+    .pipe($.size({
+      title: 'SASS'
+    }))
     .pipe(gulp.dest(scssDst))
     .pipe($.browserSync.stream());
 };

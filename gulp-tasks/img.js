@@ -6,13 +6,15 @@ $.size = require('gulp-size');
 $.browserSync = require('browser-sync').create();
 
 var imgSrc = './src/assets/imgs/**/*',
-    imgDst = './show';
+  imgDst = './docs';
 
 module.exports = function () {
-    return gulp.src(imgSrc)
-      .pipe($.image())
-      .pipe($.imagemin())
-      .pipe($.size({title: 'IMG'}))
-      .pipe(gulp.dest(imgDst))
-      .pipe($.browserSync.stream());
+  return gulp.src(imgSrc)
+    .pipe($.image())
+    .pipe($.imagemin())
+    .pipe($.size({
+      title: 'IMG'
+    }))
+    .pipe(gulp.dest(imgDst))
+    .pipe($.browserSync.stream());
 };
