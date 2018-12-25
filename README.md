@@ -1,4 +1,4 @@
-![carousel-slider.js logo](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/carousel-slider-logo.png)
+![carousel-slider.js logo](http://thibaultjanbeyer.github.io/carousel-slider.js/carousel-slider-logo.png)
 
 # carousel-slider.js
 
@@ -14,7 +14,7 @@ a simple but awesome carousel slider
 Project Page: Demo, Info & Updates
 -----------------------------------
 
-http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/
+http://thibaultjanbeyer.github.io/carousel-slider.js/
 
 
 Key-Features
@@ -33,7 +33,7 @@ Key-Features
 + Slide just anything
 + Free for ever & everything
 
-![typewriter icon animation](http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/typewriter.gif)
+![typewriter icon animation](http://thibaultjanbeyer.github.io/carousel-slider.js/typewriter.gif)
 
 Install
 ---------------
@@ -42,7 +42,7 @@ Carousel-Slider.js is jQuery dependant. Add jQuery and the Carousel-Slider.js to
 
 ```html
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/cls.min.js"></script>
+<script src="http://thibaultjanbeyer.github.io/carousel-slider.js/cls.min.js"></script>
 ```
 
 That's it! You're ready to rock!
@@ -177,7 +177,7 @@ The code above captures when a specific Carousel-Slider with the ID of mySlider 
 
 
 ------------------
-Check out http://kit.thibaultjanbeyer.com/tools/carousel-slider.js/ if you need more examples.
+Check out http://thibaultjanbeyer.github.io/carousel-slider.js/ if you need more examples.
 
 ------------------
 Have Fun !
